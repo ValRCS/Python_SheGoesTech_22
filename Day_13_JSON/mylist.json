@@ -1,0 +1,16 @@
+[
+    "Valdis",
+    {
+        "likes": [
+            "potatoes",
+            "chocolate"
+        ]
+    },
+    50,
+    60,
+    70,
+    null,
+    true,
+    false,
+    "Something"
+]
