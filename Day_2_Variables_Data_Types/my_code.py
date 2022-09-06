@@ -1,3 +1,3 @@
 print("My code today")
 print("beer " * 5)
-print("banana " * 15)
+print("What a long Day!")
