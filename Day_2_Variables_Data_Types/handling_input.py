@@ -1,6 +1,9 @@
 import datetime
 print("Today is", datetime.datetime.now())
 print("The year is", datetime.datetime.now().year)
+current_year = datetime.datetime.now().year
+print("The year is", current_year)
+
 
 my_name = input("What is your name friend? ")
 print(f"Wow that is a nice name {my_name}") # i am using f-string formatting which is available in Python since 3.6 and up
