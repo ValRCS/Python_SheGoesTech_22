@@ -22,3 +22,4 @@ print(number, abs(number)) # this is a function that returns the absolute value 
 help(print) # this is a function that returns the help for a function print
 # help was more useful when IDEs were not so good :)
 
+# whew that was a lot of information
