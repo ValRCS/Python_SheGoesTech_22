@@ -12,4 +12,5 @@
 
 # ***** 
 
-# Note: remember that several symbols can be printed at once, for example: print ("" * 10 + "*" * 6)
+# Note: remember that several symbols can be 
+# printed at once, for example: print ("" * 10 + "*" * 6)
