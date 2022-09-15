@@ -1,3 +1,4 @@
+import enum
 import string  # this has some extra string constants not required usually
 # #
 # what is a string really ?
@@ -401,3 +402,6 @@ print(city.lstrip())  # we still have whitespace after right side
 # # # # # # # # # # # # sentence = "A quick brown fox run over a sleeping dog"
 # # # # # # # # # # # # words = sentence.split()
 # # # # # # # # # # # # print(words)
+
+for i, c in enumerate(food):
+    print(f"Index {i}: Letter -> {c}")
