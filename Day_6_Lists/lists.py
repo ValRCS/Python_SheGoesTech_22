@@ -1,97 +1,107 @@
-# # # # you have some similar items that you want to store
+# # # # # you have some similar items that you want to store
 # # a1 = 3
 # # a2 = 5
 # # a3 = 8
 # # # ...
+# # a99 = 241
 # # a100 = 151
-# # # # # # # # There has to be a better way
+# # # # # # # # # There has to be a better way
+# # # #
+# # # # # # # # # # # What is a list after all?
+# # # # # # # # # # # * ordered
+# # # # # # # # # # # * collection of arbitrary objects (anything goes in)
+# # # # # # # # # # # * nested (onion principle, Matroyshka)
+# # # # # # # # # # # * mutable - maināmas vērtības
+# # # # # # # # # # # * dynamic - size can change
+# # # # # # # # # trade_off - not the most efficient as far as memory usage goes
+# # # ## for more space efficiency there are Python libraries such as numpy with ndarray structures which are based C arrays
 # # #
-# # # # # # # # # # What is a list after all?
-# # # # # # # # # # * ordered
-# # # # # # # # # # * collection of arbitrary objects (anything goes in)
-# # # # # # # # # # * nested (onion principle, Matroyshka)
-# # # # # # # # # # * mutable - maināmas vērtības
-# # # # # # # # # # * dynamic - size can change
-# # # # # # # # trade_off - not the most efficient as far as memory usage goes
-# # ## for more space efficiency there are Python libraries such as numpy with ndarray structures which are based C arrays
-# #
 # empty_list = []  # alternative would be empty_list = list()
+# # notice the square brackets
+# # in Python square brackets are often used to denote a list
 # print(empty_list)  # we can add values later
-# print(len(empty_list))
-# #
+# print(len(empty_list)) # should be 0
+# # #
 # my_list = [5, 6, "Valdis", True, 3.65, "alus"]  # most common way of creating a list using [el1, el2]
 # print(my_list)
-# print(type(my_list), len(my_list))
-# #
-# #
+# print(type(my_list), len(my_list)) # prints type and length
+# # #
+# # #
 # print(my_list[0])  # so list index starts at 0 for the first element
-# # # major difference with string is that lists are mutable
+# # # # major difference with string is that lists are mutable
 # my_list[1] = "Mr. 50"  # lists are mutable (unlike strings) types inside also will change on the run
 # print(my_list)
 # drink = my_list[-1]  # last element
 # print(my_list[-1], drink, my_list[5])  # again like in string we have indexes in both directions
-# #
-# # # typically we do not need an index for items when looping
+# # #
+# # # # typically we do not need an index for items when looping
 # for el in my_list:
 #     print(el, "is type", type(el))
-# # # Pythonic way to show index is to enumerate
+# # # # Pythonic way to show index is to enumerate
 # for i, el in enumerate(my_list):  # if we need index , default start is 0
 #     print(i, el, "is type", type(el))
 #     print(f"Item no. {i} is {el}")
-# #
-# # # i can start index at some value
+# # #
+# # # # i can start index at some value
 # for i,el in enumerate(my_list, start=1000): # if we need index to start at some number
 #     print(f"Item no. {i} is {el}")
-# #
-# list_2d = list(enumerate(my_list))
-# print(list_2d)
-# #
+# # #
+
+# # list_2d = list(enumerate(my_list, start=100))
+# # print(list_2d) # this will be a two, dimensional list, list containing lists
+# # #
+# # typical is to use plural for lists
 # numbers = list(range(10)) # range is not a list it used to be in Python 2.7, it is ready on demand
 # print(numbers)
-# #
-# # print(len(my_list))
-# # for i in range(len(my_list)): # this way is not encouraged, this is too C like, no need for this style
-# #     print(f"Item no. {i} is {my_list[i]}")
+# # #
+# # # print(len(my_list))
+# for i in range(len(my_list)): # this way is not encouraged, this is too C like, no need for this style
+#     print(f"Item no. {i} is {my_list[i]}")
 
 # drinks = ["water", "juice", "coffee", "tea", "milk", "beer"]
-# # idioms
+# # # idioms
 # for drink in drinks:  # list in plural item in singular
 #     print(drink)
-# #
-# # List slicing - we can use it to get a part of the list
+# # #
+# # # List slicing - we can use it to get a part of the list
 # print(my_list[:3]) # so we only print the first 3 elements from the list
+# print(drinks[:3]) # so we only print the first 3 elements from the list
 # print(my_list[-2:]) # last two
+# print(drinks[-2:]) # last two
 # print(my_list[1:4]) # from the second to the fourth, fifth is not included
+# print(drinks[1:4]) # from the second to the fourth, fifth is not included
 # print( my_list[1:-1]) # from the second to the last but one
 # print(my_list[::2]) # jumping over every 2nd one
 # my_numbers = list(range(100,200,10)) # no 0 lidz 9, also shows how to create a list from another sequence like object
 # print(my_numbers)
 # print(numbers)
 # print(numbers[::2])  # evens starting with 0, since we jump to every 2nd one
-# print(numbers[1::2])  # so odd numbers here
-# print(my_numbers[::2]) # even starting with 0, 2, 4
-# print(my_numbers[1::2]) # all odd indexed numbers, index 1, 3, 5, 7
-# # # # # print(my_list[1::2]) # start with 2nd element and then take every 2nd element
-# # # print(my_list[-1], my_list[len(my_list)-1]) # last element, we use the short syntax
-# print(my_numbers[::-1])
+# print(numbers[1::2])  # so odd numbers here, but realy odd indexes
+# print(my_numbers[::2]) # even starting with 100, 120, 140, 160, 180
+# print(my_numbers[1::2]) # all odd indexed numbers, index 1, 3, 5, 7 so 110, 130, 150, 170, 190
+# # # # # # print(my_list[1::2]) # start with 2nd element and then take every 2nd element
+# # # # print(my_list[-1], my_list[len(my_list)-1]) # last element, we use the short syntax
+# # print(my_numbers[::-1])
 # print(my_list[::-1])
 # print(numbers[::-1])
+# print(my_numbers[::-1])
 
+# # for iterating over large lists in reverse order we can use reversed() function
 # print(reversed(numbers)) # this we would use when we do not need the list completely for looping
-# # # why would you use such a construction
-# # # because you do not want to create a new list in memory, you want to use the original
+# # # # why would you use such a construction
+# # # # because you do not want to create a new list in memory, you want to use the original
 # for n in reversed(numbers):  # this is more efficient than numbers[::-1] because we do not create a new list in memory
 #     print(n)
-# # print(list(reversed(numbers)))
-# my_reversed_numbers = my_numbers[::-1]
-# print(my_reversed_numbers)
-# # # # # print(reversed(my_list)) # returns an iterator - so not a list but sort of prepared to list collection
-# # # # # print(list(reversed(my_list))) # so we need to cast it to list
-# # # # # print(my_list[::-1]) # so same as above when used on a list
-# # # empty_list = []  # more common
-# # also_empty_list = list()
-# # print(empty_list, also_empty_list)
-# food = "kartupelis"
+# # # print(list(reversed(numbers)))
+# # my_reversed_numbers = my_numbers[::-1]
+# # print(my_reversed_numbers)
+# # # # # # print(reversed(my_list)) # returns an iterator - so not a list but sort of prepared to list collection
+# # # # # # print(list(reversed(my_list))) # so we need to cast it to list
+# # # # # # print(my_list[::-1]) # so same as above when used on a list
+# # # # empty_list = []  # more common
+# # # also_empty_list = list()
+# # # print(empty_list, also_empty_list)
+# food = "kartupelis"  # kartupelis is a potato in Latvian
 # print(food)
 # food_chars = list(food) # so type casing just like str, int, float, bool etc
 # # list will work with any sequence type - and str is a sequence type
@@ -102,7 +112,7 @@
 # print(food_chars)
 # maybe_food = str(food_chars) # not quite what we want, but it is a string
 # print(maybe_food) # just a string of what printing a list would look like
-# # so maybe_food is a string, but it is not a list anymore
+# # # so maybe_food is a string, but it is not a list anymore
 # food_again = "".join(food_chars) # "" shows what we are putting between each character, in this case nothing
 # print(food_again)
 # food_again_with_space = " ".join(food_chars) # "" shows what we are putting between each character
@@ -115,13 +125,22 @@
 # print(new_text)
 # # num_string = "||".join(numbers) # we will need to convert numbers to theri str representation
 # # print(num_string)
+# # we can solve the above with list comprehension - to be seen later on
 
-# # # # print(list("kartupelis")) # can create a list out of string
+# # # # # print(list("kartupelis")) # can create a list out of string
 # print("kartupelis".split("p")) # i could split string by something
-# sentence = "A quick brown fox jumped over a sleeping dog"
+# sentence = "A quick brown fox jumped \t\t over    a sleeping dog"
 # print(sentence)  # string
-# words = sentence.split(" ")  # we split by some character in this case whitespace
+# words = sentence.split()  # we split by some character in this case whitespace
 # print(words) # list with words
+# print(sentence.split(" ")) # same as above, but strictly splitting by single space
+# words[3] = "bear"
+# print(words)
+# back_to_sentence = " ".join(words) # so we join the list back into a string
+# print(back_to_sentence)
+
+# # TODO explore more list methods
+
 # #
 # # sentence_with_exclams = ".!.".join(words)
 # # print(sentence_with_exclams)
