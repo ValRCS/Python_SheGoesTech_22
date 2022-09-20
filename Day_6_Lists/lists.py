@@ -22,8 +22,11 @@
 # print(empty_list)  # we can add values later
 # print(len(empty_list)) # should be 0
 # # #
-# my_list = [5, 6, "Valdis", True, 3.65, "alus"]  # most common way of creating a list using [el1, el2]
-# print(my_list)
+from tkinter import N
+
+
+my_list = [5, 6, "Valdis", True, 3.65, "alus"]  # most common way of creating a list using [el1, el2]
+print(my_list)
 # print(type(my_list), len(my_list)) # prints type and length
 # # #
 # # #
@@ -140,35 +143,48 @@
 # print(back_to_sentence)
 
 # # TODO explore more list methods
+## FIXME for bugs and errors
+## TODO for things to do
 
 # #
 # # sentence_with_exclams = ".!.".join(words)
 # # print(sentence_with_exclams)
 # # # # # # # # # # how to check for existance in list
 # print(my_list)
-# print("3.65 is in my list?", 3.65 in my_list)
-# # print(66 in my_list)
-# print("Valdis" in my_list)
-# print(my_list[2]) # Valdis
-# print("al" in "Valdis", "al" in my_list[2])
-# print("al" in my_list)  # this is false,because in needs a exact match, to get partial we need to go deeper
+# membership check for list
+print("3.65 is in my list?", 3.65 in my_list)
+print(66 in my_list)
+print("Valdis" in my_list)
+print(my_list[2]) # Valdis
+print("al" in "Valdis", "al" in my_list[2])
+print("al" in my_list)  # this is false,because in needs a exact match, to get partial we need to go deeper
 # # # # # # # # # # # # iterate over items
-# # print("*"*20)
-# # # for it in my_list:
-# # #     print(it)
+print("*"*20)
+for it in my_list:
+    print(it)
 # # #
-# needle = "al" # what we want to find in our list
-# for item in my_list:
-#     print("Checking ", item)
-#     if type(item) == str and needle in item: # not all types have in operator
-#         print(f"Found {needle=} in {item=}") # python 3.8 and up, good for debuggin
-#         print(f"Found needle={needle} in item={item}") # for python 3.7
+## looking for a needle in a haystack
+# idiomatic way to check for existance
+needle = "al" # what we want to find in our list
+for item in my_list:
+    print("Checking ", item)
+    if type(item) == str and needle in item: # not all types have in operator
+        print(f"Found {needle=} in {item=}") # python 3.8 and up, good for debuggin
+        print(f"Found needle={needle} in item={item}") # for python 3.7
 # # #
 # # # # # # # # # # # #
+## adding/appending items to list
 # # # # # # # # my_list.append()
-# my_list.append("Bauskas alus") # adds "Bauskas alus" at the end of my_list
-# my_list.append("Valmiermuižas alus")  # IN PLACE methods, means we modify the list
-# print(my_list)
+# my_list.
+my_list.append("Bauskas alus") # adds "Bauskas alus" at the end of my_list
+my_list.append("Valmiermuižas alus")  # IN PLACE methods, means we modify the list
+print(my_list)
+
+# compare to OUT OF PLACE + 
+another_list = my_list + ["Alus", "Vīns", "Šokolāde"] # this is not in place, we create a new list
+print(my_list)
+print(another_list)
+
 # # #
 # # # # # # # # # # example how to filter something
 # find_list = [] # so we have an empty list in beginning
@@ -193,8 +209,33 @@
 # print(new_list) # notice that we have a list in the list
 # print(new_list[-1])
 # print(new_list[-1][-1], new_list[-1][1]) # in this case for size 2 1 and -1 give same results
-# new_list.extend(["Fantastiskais", "Lapsa"]) # very similar to += IN PLACE
-# print(new_list)
+
+# using append to add multiple items will produce a nested list
+my_list.append(["Svarīgais", "Mazais"]) #notice append added a list a s nested
+print(my_list) # notice that we have a list in the list
+print(my_list[-1]) # negative index means we start from the end
+print(my_list[8]) # positive index means we start from the beginning
+# to get last item of nested list
+print(my_list[-1][-1], my_list[-1][1]) # in this case for size 2 1 and -1 give same results
+# if you want to keep your list flat you use extend
+my_list.extend(["Fantastiskais", "Lapsa"]) # very similar to += IN PLACE
+print(my_list)
+
+my_list.remove(6) # Again IN PLACE, removes somethign from my_list
+print(my_list)
+my_list.remove(5) # removes first occurence of 5
+print(my_list)
+my_list.remove(['Svarīgais', 'Mazais'])
+print(my_list)
+# so how to remove last item from list?
+# we could use remove 
+# alternative we could use OUT OF PLACE slicing
+my_list = my_list[:-1] # this is OUT OF PLACE, we create a new list overwriting old one
+print(my_list)
+
+# get rid of first three items from list
+my_list = my_list[3:] # this is OUT OF PLACE, we create a new list overwriting old one
+print(my_list)
 # # #
 # # # # print(f"{str(my_list)}") # not quite what we want
 # # # # # # # how to convert all values to str
@@ -222,7 +263,104 @@
 # #
 # #
 # #
-# # # # # # # # # # # list comprehensions make it even short
+numbers = list(range(1, 11))
+print(numbers)
+# how could I get squares from numbers? and save them in a list?
+squares = []
+for num in numbers: # numbers could have been range(1,11) as well
+    squares.append(num**2) # so we are squaring each number and appending to squares
+print(squares)
+
+# so it is very typical to start with a blank list and then append to it
+# by going through some other list or some other iterable(string, and other iterables)
+
+# # # # # # # # # # # list comprehensions make it even shorter
+also_squared = [num**2 for num in numbers] # so we are squaring each number and appending to squares
+print(also_squared)
+
+# if you only wanted odd squares what would you do?
+odd_squared = [num**2 for num in numbers if num % 2 == 1] # so we are squaring each number and appending to squares
+# so list comprehensions are very similar to for loops
+# how would we do this with a for loop?
+odd_squared_also = []
+for num in numbers:
+    if num % 2 == 1:
+        odd_squared_also.append(num**2)
+
+print(odd_squared)
+print(odd_squared_also)
+
+odd_numbers = [num for num in numbers if num % 2 == 1]
+print(odd_numbers)
+
+numbers_copy = [num for num in numbers] # so we are copying numbers to numbers_copy
+print(numbers_copy)
+# above is rarely seen, but it is possible
+# because we have a common copy method
+numbers_copy_also = numbers.copy() # so we are copying numbers to numbers_copy
+print(numbers_copy_also)
+
+# this is different than just using a variable to a list
+# NOT A COPY!
+numbers_alias = numbers # so we are aliasing numbers to numbers_alias
+
+numbers[4] = 100
+# so if we change numbers, numbers_alias will change as well
+print(numbers)
+print(numbers_alias)
+print(numbers is numbers_alias) # so they are the same object
+
+# notice how numbers_copy remains the same
+print(numbers_copy)
+print(numbers_copy is numbers) # so they are different objects
+
+# == compares contents for lists!
+print(numbers_copy_also == numbers_copy)
+# however
+print(numbers_copy_also is numbers_copy) # False because not the same objects!
+
+numbers.append(42)
+numbers.append(4)
+print(numbers)
+print(numbers.count(4)) # how many times 4 is in numbers
+
+print(numbers.index(42)) # what is the first index of 42 in numbers
+
+numbers.insert(2, 50) # insert 50 at index 2
+# this will push everything to the right, could be expensive in a large list 
+print(numbers)
+
+last_item = numbers.pop() # removes last item from list and returns it
+# pop will give you an error if list is empty
+print(last_item)
+print(numbers)
+# pop and append go together
+numbers.append(last_item)
+print(numbers)
+
+numbers.reverse() # IN PLACE
+print(numbers)
+# could use OUT OF PLACE reverse
+numbers = numbers[::-1] # OUT OF PLACE
+print(numbers) # back to original
+
+# OUT OF PLACE sort 
+sorted_numbers = sorted(numbers)
+print(sorted_numbers)
+print(numbers) # original list is not changed
+
+# IN PLACE sort
+numbers.sort()
+print(numbers) # original list is changed and can not be retrieved
+
+# finally we can clear the list in place
+numbers.clear() # IN PLACE clears the list!
+print(numbers)
+
+# so when should you use list comprehensions and when should you use for loops?
+# for loops are more flexible, you can do more things with them
+# use for loops when you have more complex logic
+
 # # print(my_list)
 # str_list_2 = [str(item) for item in my_list]  # so i go through each item and make a new list with string versions of all items
 # print(str_list_2)
