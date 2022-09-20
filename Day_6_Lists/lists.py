@@ -349,6 +349,11 @@ sorted_numbers = sorted(numbers)
 print(sorted_numbers)
 print(numbers) # original list is not changed
 
+# we can sum, min and max on a list of same data types
+print(sum(numbers))
+print(min(numbers))
+print(max(numbers))
+
 # IN PLACE sort
 numbers.sort()
 print(numbers) # original list is changed and can not be retrieved
