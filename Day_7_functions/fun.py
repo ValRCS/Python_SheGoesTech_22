@@ -172,75 +172,99 @@
 # # # #
 # # #
 # # # I can return multiple values from a function
-# # def multi_calc(a, b):
-# #     # could add check for 0
-# #     print(f"{a}*{b}={a * b}")
-# #     print(f"{a}/{b}={a / b}")
-# #     return a * b, int(a / b)  # could return even more, multiple values are returned as tuples
+def multi_calc(a, b):
+    # could add check for 0
+    print(f"{a}*{b}={a * b}")
+    print(f"{a}/{b}={a / b}")
+    return a * b, int(a / b)  # could return even more, multiple values are returned as tuples
 
 
 # # #
-# # #
-# # # my_mult, my_div = multi_calc(10, 2)  # technically this is so called tuple unpacking
-# # # print(my_mult, my_div)
-# # #
-# # # my_tuple = multi_calc(10, 2)  # in reality we are returning a collection data type called tuple
-# # # print(my_tuple)
+# # # so i come up with two variable names
+# my_mult, my_div = multi_calc(10, 2)  # technically this is so called tuple unpacking
+# print(my_mult, my_div)
+# # # #
+# my_tuple = multi_calc(10, 2)  # in reality we are returning a collection data type called tuple
+# print(my_tuple)
+
+# if your values are similar then you can use a list and return it
+def create_new_list(start, end):
+    new_list = [] # so you create a list inside the function
+    for i in range(start, end+1):
+        new_list.append(i)
+    return new_list
+
+# new_list = create_new_list(1, 10)
+# print(new_list)
+# same_numbers_different_list = list(range(1,11))
+# print(same_numbers_different_list)
 # # #
 # # #
 # # # # print(multi_calc(9,2)) # parenthesis show up because we are returning a tuple(which is likea  fixed list)
 # # #
 # # # default arguments - we can predefine default values for parameters
-# # def big_calc(a=-500, b=1000, c=100):  # so c will be 100 if not given as argument
-# #     result = a * b + c
-# #     print(f"a*b+c={result}")
-# #     return result
+# better name for function would be what it does, not how it does it
+def big_calc(a=-500, b=1000, c=100, is_printing=True):  # so c will be 100 if not given as argument
+    result = a + b + c
+    if is_printing:
+        print(f"{a}+{b}+{c}={result}")
+    return result
 
 
 # # #
-# # #
-# # # my_big = big_calc(3, 4, 10)
-# # # print(my_big)  # 22
-# # # another_calc = big_calc(3, 5)  # notice we only need 2 arguments if we are lazy
-# # # print(my_big, another_calc)  # should be 3*5+100=115
-# # # # #
-# # # print(big_calc(5))  # only giving value for a, : b,c use defaults so 5100
-# # # print(big_calc())  # this will use ALL 3 default values so negative -500*1000+100==-499900
-# # # # with named arguments we can use default values for some parameters and not others
-# # # print(big_calc(c=1000, b=5, a=4))  # i can pass arguments in whichever order I want if i use named arguments
-# # # # the above is a not a great example of good practice, because we are needlessly changing the order of arguments
-# # # print("Valdis", "Līga", end="*****\n", sep="::")
+# # # default values will not be used if all arguments are given
+# my_big = big_calc(3, 4, 10)
+# print(my_big)  # 22
+# another_calc = big_calc(3, 5)  # notice we only need 2 arguments if we are lazy
+# print(my_big, another_calc)  # should be 3+5+100=108
+# # # # # #
+# print(big_calc(5))  # only giving value for a, : b,c use defaults so 1105
+# print(big_calc())  # this will use ALL 3 default values so negative -500+1000+100=600
+# # # # # with named arguments we can use default values for some parameters and not others
+# print(big_calc(c=1000, b=5, a=4))  # i can pass arguments in whichever order I want if i use named arguments
+# # do not do above on purpose, it is confusing
+# # # # # the above is a not a great example of good practice, because we are needlessly changing the order of arguments
+# # # # print("Valdis", "Līga", end="*****\n", sep="::")
+# calc_value = big_calc(10,20,40, False)  # i can also pass a boolean value
+# print(calc_value)
 
+# # TIP: use named parameters when using boolean parameters
+# another_val = big_calc(30, 40, is_printing=False) # here it is required to use named parameter
+# print(another_val)
+
+# # named parameters are also useful when you have a lot of parameters
+# print("Hello", "Valdis", "Līga", "and", "friends", sep="::", end="*****\n")
+# print("Hello", "Valdis", "Līga", "and", "friends",  end="*****\n", sep="::") # order does not matter if named
 
 # # #
 # # #
 # # # # print(big_calc(b=25)) # i can pass only one named argument, the rest stay default
 # # #
 # # #
-# # def talk(text, is_yelling=False, trim=False, verbose=True):
-# #     """
-# #     Prints text
-# #     is_yelling capitalizes text
-# #     trim - trims whitespace from both ends
-# #     verbose - if you want to print something on screen
-# #     returns transformed text
-# #     """
-# #     if trim:
-# #         text = text.strip()
-# #     if is_yelling:
-# #         text = text.upper()
-# #     if verbose:
-# #         print(text)  # printing is considered a side effect inside a function
-# #     return text
+def talk(text, is_yelling=False, trim=False, verbose=True):
+    """
+    Prints text\n
+    is_yelling capitalizes text\n
+    trim - trims whitespace from both ends, takes False or True\n
+    verbose - if you want to print something on screen\n
+    returns transformed text
+    """
+    if trim:
+        text = text.strip()
+    if is_yelling:
+        text = text.upper()
+    if verbose:
+        print(text)  # printing is considered a side effect inside a function
+    return text
 
 
 # # #
 # # #
-# # # talk("Hello there")  # basically a print
-# # # talk("Hello there indeed", True)  # True refers to is_yelling but it might not be obvious with many flags
-# # # talk("Hello there", is_yelling=True)  # this is more clear
-# # # talk("   Please   trim me   ", True)  # i wanted a trim not yell...
-# # # talk("   Please   trim me   ", trim=True)  # so now i should get a trim
+# talk("Hello there")  # basically a print
+# talk("Hello there indeed", True)  # True refers to is_yelling but it might not be obvious with many flags
+# talk("Hello there", is_yelling=True)  # this is more clear
+# # # # talk("   Please   trim me   ", True)  # i wanted a trim not yell...
+# talk("   Please   trim me   ", trim=True)  # so now i should get a trim
 # # # trimmed_text = talk("   Please   trim me   ", trim=True, verbose=False)  # verbose=False means no printing
 # # # print(trimmed_text)  # prints only trimmed text
 # # # #
@@ -278,15 +302,36 @@
 # # # #
 # # # #
 # # # #
+
+# variable number of arguments function
+def multi_sum(*args):  # *args is a tuple of all arguments
+    print(args)  # args is a tuple, we can iterate/loop over it
+    print(type(args))
+    result = 0
+    for arg in args:
+        result += arg
+    return result
+
+# print(multi_sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+# print(multi_sum(1, 2))
+# print(multi_sum())
+
+# alternative would have been to use a list
+def multi_sum2(my_list):  # *args is a tuple of all arguments
+    return sum(my_list)
 # # #
 # # # # so preferred way to structure larger programs is to have some main function which calls everything else
-# # def var_fun(required_n, *optional_arg_list, my_default=1000):
-# #     print("Required", required_n)
-# #     print("my_default", my_default)
-# #     for n in optional_arg_list:
-# #         print("optional", n)
-# #     return required_n + sum(optional_arg_list) + my_default  # assuming we give parameters that are summable
+def var_fun(required_n, *optional_arg_list, my_default=1000):
+    print("Required", required_n)
+    print("my_default", my_default)
+    for n in optional_arg_list:
+        print("optional", n)
+    return required_n + sum(optional_arg_list) + my_default  # assuming we give parameters that are summable
 
+# print(var_fun(10, 20, 30, 40, 50, my_default=100))
+# print(var_fun(10, 20, 30, 40, 50)) # so 50 here is optional and my_default is default
+# print(var_fun(10, 20, 30, 40, 50, 100)) # so 50 here is optional and my_default is default
+# print(var_fun(200))
 
 # # #
 # # #
@@ -295,10 +340,11 @@
 # # # so now it is 2000
 
 # # # # we call that main() from if guard
-# # def main():  # can call other functions from here, main can be named anything
-# #     print("Starting my main program")
-# #     result = var_fun(100, 6, 10, 50, my_default=1_000_000)
-# #     print(result)
+def main():  # can call other functions from here, main can be named anything
+    print("Starting my main program")
+    result = var_fun(100, 6, 10, 50, my_default=1_000_000)
+    print(result)
+    # can keep calling other functions here
 
 
 # # #     result = var_fun(200)  # so only 200 was required rest were optional
@@ -309,7 +355,12 @@
 # # #
 # # #
 # # # # this is used to check whether you started function as main or imported it as a library
-# # if __name__ == "__main__":
-# #     main()
+if __name__ == "__main__":
+    print("Starting main")
+    main()
+    # function_after_main() # will not work until we define it
 # #     # I could also use this to check if you are running this file as a library
 # #     # I can run more code here if i want to
+
+def function_after_main():
+    print("I am after main")
