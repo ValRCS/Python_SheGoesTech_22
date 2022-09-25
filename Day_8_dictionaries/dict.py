@@ -1,168 +1,187 @@
-# # # # # # # # # # Python Dictionaries
-# # # # # # # # # # https://docs.python.org/3/tutorial/datastructures.html#dictionaries
-# # # # # # # # # # key - value pairs
-# # # # # # # # # # unordered
-# # # # # # # # # # other languages - associative array, map, hashmap
-# # # # # # # # # # O(1) value lookup - very quick even for large dictionaries
-# # # # # # # mutable - can be changed
-# # # # # # # dynamic can grow or shrink in size
-# # # # ### iterable can loop through (order from 3.6+ is in order of insertion)
-# # # # # # # can be nested - matroyshka principle
-# # # # # # # from Python 3.6 dictionaries preserve insertion order
-# #
-# # empty_dict = {}  # another way is with dict()
-# # another_empty_dict = dict()
-# # # # avoid calling your variable dict  because dict is used as builtin function
+# # # # # # # # # # # Python Dictionaries
+# # # # # # # # # # # https://docs.python.org/3/tutorial/datastructures.html#dictionaries
+# # # # # # # # # # # key - value pairs
+# # # # # # # # # # # unordered
+# # # # # # # # # # # other languages - associative array, map, hashmap
+# # # # # # # # # # # O(1) value lookup - very quick even for large dictionaries
+# # # # # # # # mutable - can be changed
+# # # # # # # # dynamic can grow or shrink in size
+# # # # # ### iterable can loop through (order from 3.6+ is in order of insertion)
+# # # # # # # # can be nested - matroyshka principle
+# # # # # # # # from Python 3.6 dictionaries preserve insertion order
 # # #
-# # print(empty_dict)
-# # print(another_empty_dict)
+# empty_dict = {}  # another way is with dict() compare with list which is []
+# another_empty_dict = dict()
+# # # # # avoid calling your variable dict  because dict is used as builtin function
+# # best dictionary name would actually explain what it stores
+# # for example - phonebook, user_info, etc.
+# # # #
+# print(empty_dict)
+# print(another_empty_dict)
+# # # #
+# print(len(empty_dict))
+# print(type(empty_dict))
 # # #
-# # print(len(empty_dict))
-# # print(type(empty_dict))
-# #
-# # #
+# # # #
+# # we can create a dictionary with some values
 # tel = {'valdis': 2640, 'līga': 2911}  # create dict with 2 key-value pairs
 # print(tel)
-# # adding new key-value pair
+# # # adding new key-value pair
 # tel['maija'] = 2653  # i add a new key-value pair to the dictionary or overwrite the old one
 # print(tel)
-# # print(type(tel))
-# # #
-# # # # # this is why we use dictionaries very fast to look up
+# # # print(type(tel))
+# # # #
+# # # # # # this is why we use dictionaries very fast to look up
 # print(tel['valdis'])  # this lookup will be very fast O(1) even with huge dictionary
-# # #
-# key = "maija"
+# # # #
+# key = "maija"  # variable key could be named anything
 # print(tel[key])  # get value by key
 
-# # # values can be changed
+# # # # values can be changed
 # tel['valdis'] = 1188  # keys have to be unique, so here I will overwrite my old value
 # print(tel)
-# # # # if I have many phones well, then I have options, how about a list?
+# # # # # if I have many phones well, then I have options, how about a list?
 # tel['valdis'] = [2640, 1188, 911]  # setting value to a list
 # print(tel)
 # print(tel['valdis'])
 # print(tel['valdis'][-1], tel['valdis'][2])
-# #
-# #
 # # #
+# # #
+# # # #
 # may_phone = tel[key] # we can always save values/reference in a new variable
 # print(may_phone) # once it is out no relation to dictionary
 # tel['ValdisZ'] = 1001 # case sensitive keys
 # tel['Valdisz'] = 1002 # case sensitive keys, not good style of course for such variables
 # print(tel)
-# # # # # # # # # # # keys are unique, values can match for different keys
+# # # # # # # # # # # # keys are unique, values can match for different keys
 # tel['valdis'] = 1001
 # print(tel) # so by givine new value to key we overwrote the old one
-# # # # # tel['valdis'] = [2900, 2911, 2640]
-# # # # # print(tel)
-# # # # # val_phones = tel['valdis'] # instant lookup
-# # # # # print(val_phones) # so this should be a list
-# # # # # tel['valdis'] = 2640
-# # # # # print(tel)
+# # # # # # tel['valdis'] = [2900, 2911, 2640]
+# # # # # # print(tel)
+# # # # # # val_phones = tel['valdis'] # instant lookup
+# # # # # # print(val_phones) # so this should be a list
+# # # # # # tel['valdis'] = 2640
+# # # # # # print(tel)
 # tel['petēris'] = 2911
 # print(tel)
+# # string keys can be of any length including whitespace
 # tel['visvaldis otrais pētera dēls'] = 1888
 # print(tel)
-# #
+# # #
 # print(tel.keys(), type(tel.keys()))
 # key_list = list(tel.keys()) # so i can create a list of dictionary keys
 # print(key_list)  # these values are not related to dictionary keys anymore
-# # #
-# # # # # # similarly I can extract values from a dictionary
+# # # #
+# # # # # # # similarly I can extract values from a dictionary
 # print(tel.values(), type(tel.values()))
 # value_list = list(tel.values())
 # print(value_list)
-# # #
+# # # #
 # key_list.append("rūta")
 # value_list.append(1008)
-# # # of course I could have just added tel["rūta"] = 1008 directly like in the above examples
-# #
+# # # # of course I could have just added tel["rūta"] = 1008 directly like in the above examples
+# # #
 # print(key_list)
 # print(value_list)
-# # # # i can create a new dictionary from two lists(iterables actually)
+# # # # # i can create a new dictionary from two lists(iterables actually)
+# key_list.append("edith")
+# key_list.append("kitty")
+# # however I will not add a value for edith
+# print(key_list)
+# # so using zip will create pairs as long as the shortest list !
 # new_dict = dict(zip(key_list,value_list))
 # print(new_dict)
-# # # print(tel)
-# # #
-# # print(tel['valdis'])
+# print(tel)
+# # # #
+# print(tel['valdis'])
 # # print(tel['joker']) # KeyError you would have to handle errors in try: block or we could check first
+# # membership test
 # print('valdis' in tel) # so i check for key in my dictionary very quickly
 # print('Valdis' in tel) # case sensitive so False
 # print('joker' in tel)
-# #
-# # # we could use if to check for existance of key
-# # key = "valdis"
-# # key = "Nevaldis" # i am going to overwrite the above variable
-# # if key in tel:
-# #     print(tel[key]) # do something with the value
-# # else:
-# #     print("Sorry no such key", key)
-# #
-# # # turns out Python offers a get method to get the values out without if and without errors
+# # #
+# # # # we could use if to check for existance of key
+# key = "valdis"
+# key = "Nevaldis" # i am going to overwrite the above variable
+# if key in tel:
+#     print(f"Key {key} -> value {tel[key]}") # do something with the value
+# else:
+#     print("Sorry no such key", key)
+# # #
+# # # # turns out Python offers a get method to get the values out without if and without errors
 # print(tel.get("valdis"))  # so it is just like tel["valdis"] but with error handling
 # print(tel.get("NoSuchKey"))  # so if no key exists I get None back
 # print(tel.get("NoSuchKey", "Sorry no such key found"))  # i can also add a default value
 # print(tel.get("valdis", "Sorry no such key found"))  # i can also add a default value
-# #
-# # # I want to find out if any values have 1001 this can not be fast
-# # # because I have to check every key:value pair
-# print(1001 in tel.values()) # going through values will be slow, unlike keys
 # # #
-# tel[""] = "Should not work" # it but turns out it does
-# print(tel.keys())
-# print(tel[""])
-# tel["empty_string"]= "" # this is normal
-# tel["none_value"] = None # this is normal to store unknown values
-# print(tel)
-# # #
-# # # print("THe next operation will be slow in a big dictionary")
-# # # print(1001 in tel.values()) # just in keep in mind this will be slow on big dictionaries
-# # #
-# # # tel["many_values"] = 4444, 5555, "Hmmm" # this will actually be a tuple(similar to fixed list) as a value
-# # # print(tel["many_values"])
+# # # # I want to find out if any values have 1001 this can not be fast
+# # # # because I have to check every key:value pair
+# print(1001 in tel.values()) # going through values will be slow in a big dictionary, unlike keys
+# # # #
+# # tel[""] = "Should not work" # it but turns out it does
+# # print(tel.keys())
+# # print(tel[""])
+# # tel["empty_string"]= "" # this is normal
+# # tel["none_value"] = None # this is normal to store unknown values
+# # print(tel)
+# # # #
+# # # # print("THe next operation will be slow in a big dictionary")
+# # # # print(1001 in tel.values()) # just in keep in mind this will be slow on big dictionaries
+# # # #
+# # # # tel["many_values"] = 4444, 5555, "Hmmm" # this will actually be a tuple(similar to fixed list) as a value
+# # # # print(tel["many_values"])
 # tel["inner_dict"] = {"first phone":22222, "second phone" : 34322}  #so we can store dictionaries inside dictionaries
 # print(tel)
-# # #
-# # # num_1, num_2, msg_1 = tel["many_values"] # this is tuple unpacking
-# # # print(num_1, num_2, msg_1)
-# # #
-# # # # # # # # print(tel.keys()[2]) # not possible so we need list if we need index
-# print(list(tel.keys())[2]) #  we need list if we need index
-# # #
-# # # # # # how do we handle bad keys?
-# # #
-# # # # print(tel['badkey']) # this will be an error
-# # # # my_key = "valdis"
-# # # my_key = "notarealkey"
-# # # if my_key in tel:
-# # #     print("key:", my_key, "value:", tel[my_key])
-# # # else:
-# # #     print("Couldn't find this key", my_key)
-# # #
-# # #
-# # # print(tel.get('valdis')) # so we get value by key 'valdis' similar to tel['valdis'] but without errors
-# # # print(tel.get('nevaldis'))  # default is None if not found
-# # # print(tel.get('none_value')) # here we actually get a value but it is None no way to tell without if :)
-# # # print(tel.get('valdis', "couldn't find the key")) # returns value for the key if found
-# # # print(tel.get('nevaldis', "couldn't find the key")) # or second argument if key is not found
-# # #
-# # #
-# # # # # # how about looping?
 # # # #
-# # for key in tel: # so we can iterate over all keys in a dictionary
-# #     print("key:", key, "value:", tel[key]) # no need for get since we are guaranteed key
-#     # just remember NOT to modify dictionary size(delete or add) when looping over it
+# # # # num_1, num_2, msg_1 = tel["many_values"] # this is tuple unpacking
+# # # # print(num_1, num_2, msg_1)
+# # # #
+# # # # # # # # # print(tel.keys()[2]) # not possible so we need list if we need index
+# # print(list(tel.keys())[2]) #  we need list if we need index
+# # # #
+# # # # # # # how do we handle bad keys?
+# # # #
+# # # # # print(tel['badkey']) # this will be an error
+# # # # # my_key = "valdis"
+# # # # my_key = "notarealkey"
+# # # # if my_key in tel:
+# # # #     print("key:", my_key, "value:", tel[my_key])
+# # # # else:
+# # # #     print("Couldn't find this key", my_key)
+# # # #
+# # # #
+# # # # print(tel.get('valdis')) # so we get value by key 'valdis' similar to tel['valdis'] but without errors
+# # # # print(tel.get('nevaldis'))  # default is None if not found
+# # # # print(tel.get('none_value')) # here we actually get a value but it is None no way to tell without if :)
+# # # # print(tel.get('valdis', "couldn't find the key")) # returns value for the key if found
+# # # # print(tel.get('nevaldis', "couldn't find the key")) # or second argument if key is not found
+# # # #
+# # # #
+
+# # deletion of key:value pairs
+# # if we know the key we can delete the corresponding key:value pair from the dictionary
+# del tel['visvaldis otrais pētera dēls']  # delet
+# del tel['inner_dict']  # delete inner dictionary
+# print(tel)
+
+# # # # # # # how about looping?
+# # # # #
+# for key in tel: # so we can iterate over all keys in a dictionary
+#     print("key:", key, "value:", tel[key], tel.get(key) )# no need for get since we are guaranteed key
+# # just remember NOT to modify dictionary size(delete or add) when looping over it
 # # #
-# # print(tel.items())  #special dict_items collection
-# # # # # # # # # # # # # iterate over all items (key->value pairs) in dictionary
-# # for key, value in tel.items(): # also common is k,v
-# #     # it is important not to modify this dictionary while we are looping over it
-# #     print(f"{key=}, {value=}") # this Python 3.8+ syntax good for debugging
-# #     print(f"key={key}, value={value}") # Python 3.6+
-# #     print("key=", key, "value=", value)  #older style
-# #     # do more stuff with each key value pair
+# print(tel.items())  #special dict_items collection
+# # # # # # # # # # # # # # iterate over all items (key->value pairs) in dictionary
+# for key, value in tel.items(): # also common is k,v
+#     # it is important not to modify this dictionary while we are looping over it
+#     print(f"{key=}, {value=}") # this Python 3.8+ syntax good for debugging
+#     print(f"key={key}, value={value}") # Python 3.6+
+#     print("key=", key, "value=", value)  #older style
+#     # do more stuff with each key value pair we could change values, but not keys!
+# # # #
 # # #
-# #
+
+# TODO mutate dictionary while looping in a safe way
 
 # # for key, value in tel.items():
 # #     if value < 2000: # I will get an error if value is not a numeric type
