@@ -27,3 +27,26 @@
 
 # There are two options: either walk through the copy my_dict.copy.items(), or build a new dictionary. 
 # Dictionary comprehension would be one option.
+
+# OUT OF PLACE function, it returns a new dictionary, old one is not changed
+def clean_dict_value(d, bad_val):
+    new_dict = {}
+    for key, value in d.items():
+        if value != bad_val:
+            new_dict[key] = value
+    return new_dict
+
+print(clean_dict_value({'a': 5, 'b': 6, 'c': 5}, 5)) 
+
+my_dict = {'a': 5, 'b': 6, 'c': 5, 'd':3, 'e': 5, 'f': 5, 'g':8}	
+new_dict = clean_dict_value(my_dict, 5)
+print(new_dict)
+print(my_dict)
+
+# you can also use dictionary comprehension, STILL OUT OF PLACE
+def clean_dict_value_2(d, bad_val):
+    return {key: value for key, value in d.items() if value != bad_val}
+
+also_new_dict = clean_dict_value_2(my_dict, 5)
+print(also_new_dict)
+print(my_dict)
