@@ -183,14 +183,19 @@
 
 # TODO mutate dictionary while looping in a safe way
 
-# # for key, value in tel.items():
-# #     if value < 2000: # I will get an error if value is not a numeric type
-# #         print("small value", value, "for key", key)
-# #         # it is okay to change a value inside loop
-# #         tel[key] = tel[key] + 2000000 # also tel[key] += 2000 would work
-# # #
-# # print(tel)
-# #
+tel = {"valdis": 1001, "līga": 1002, "rūta": 9000}
+print(tel)
+print(tel.items())
+# I can mutate/change values but not keys safely while looping
+# so I will loop through all key,value pairs and adjust some values
+for key, value in tel.items():
+    if value < 2000: # I will get an error if value is not a numeric type
+        print("small value", value, "for key", key)
+        # it is okay to change a value inside loop
+        tel[key] = tel[key] + 2_000_000 # also tel[key] += 2000 would work
+#
+print(tel)
+
 # # # i can remove keys but should be careful to do it inside loop
 # del tel['visvaldis otrais pētera dēls']
 # #
@@ -198,54 +203,80 @@
 # #
 # # # how to remove keys:value pairs inside loop?
 # # 1. create a new dictionary
-# new_dict = {}
-# for key,value in tel.items():
-#     if type(value) is int and value > 2_000:  # so I check if value is int and if it is bigger than 2000
-#         # really nothing
-#         new_dict[key] = value
+new_dict = {}
+for key,value in tel.items():
+    if type(value) is int and value > 10_000:  # so I check if value is int and if it is bigger than 2000
+        # really nothing
+        new_dict[key] = value # add a new pair to new dictionary
 
-# print(new_dict)
-# # print(tel)  # we still have the original
+print(new_dict)
+print(tel)  # we still have the original
 # #
 # # # 2. we can make this shorter with dictionary comprehension, similar idea to list comprehension
 # dict_with_only_int_values = {key:value for key, value in tel.items() if type(value) is int}
 # print(dict_with_only_int_values)  # this is a new dictionary with only int values
 # # now I am sure that all values are int and I can do something with them
-# new_dict_2 = {key:value for key,value in dict_with_only_int_values.items() if value > 2_000}
+new_dict_2 = {key:value for key,value in tel.items() if value > 10_000}
 # # # # note we can change key:value to our needs like key:value*2
-# print(new_dict_2)
+print(new_dict_2)
 
 # new_dict_3 = {key:value for key,value in tel.items() if type(value) is int and value > 2_000}
 # print(new_dict_3)
 
-# print("Dictionaries have same contents", new_dict_3 == new_dict_2)
-# print("Dictionaries are actually same", new_dict_3 is new_dict_2)  # this is false because they are different objects
+new_dict_alias = new_dict # this is just an alias to the same dictionary new_dict_2
+
+print("Dictionaries have same contents", new_dict == new_dict_2)
+print("Dictionaries are actually same", new_dict is new_dict_2)  # this is false because they are different objects
+
+# check new_dict_alias
+print("Dictionaries have same contents", new_dict == new_dict_alias)
+print("Dictionaries are actually same", new_dict is new_dict_alias)  # this is true because they are same object
 
 # new_dict_4_ref = new_dict_3  #this is just a reference to the same object
 # print("Dictionaries are actually same", new_dict_3 is new_dict_4_ref)  # this is true because they are the same object
 # # print(tel)  # we still have the original
 # #
+
+# above approach was bottom up, we could also do top down
+
 # # # we can change the original by looping through copy
-# backup = tel.copy() # just in case :) this is technically a so called shallow copy - it copies first level references
-# print("Dictionaries are actually same", tel is backup)  # this is false because they are different objects
-# print("Dictionaries have same contents", tel == backup)
+backup = tel.copy() # just in case :) this is technically a so called shallow copy - it copies first level references
+print("Dictionaries are actually same", tel is backup)  # this is false because they are different objects
+print("Dictionaries have same contents", tel == backup)
 
-# for key,value in tel.copy().items(): # i could have gone through backup as well
-#     if type(value) is not int or value < 2_000:
-#         del tel[key] # this changes the size of original dictionary
-#         # tel[key+"BIGGIE"] = value*10 # i can add a new key too if i want
-# print(tel)  # original is changed
-# print(backup) # backup is not changed
-# food = "kartupelis"
-# numbers = list(range(10))
-# letter_dict = dict(zip(numbers, food))
-# print(letter_dict)
-# print(letter_dict[3]) # here list would better since we have numbers in order
-# number_dict = dict(zip(food, numbers))
-# print(number_dict)
+# so you could loop through a copy and delete keys from original
+for key,value in tel.copy().items(): # i could have gone through backup as well
+    if value > 10_000:
+        del tel[key] # this changes the size of original dictionary
+        # tel[key+"BIGGIE"] = value*10 # i can add a new key too if i want
+print(tel)  # original is changed
+print(backup) # backup is not changed
 
-# my_counter = {key:0 for key in food}  # set default value to 0
-# print(my_counter)
+# how to restore the original phone book?
+tel = backup.copy() # this is a shallow copy
+# alternatively i could have just used tel = backup then there is no backup
+
+food = "kartupelis"
+numbers = list(range(10))
+print(food)
+print(numbers)
+letter_dict = dict(zip(numbers, food))
+print(letter_dict)
+print(letter_dict[3]) # here list would better since we have numbers in order
+# so numbers as keys in a dictionary will be useful if we have a lot of sparse data
+# meaning our keys do big jumps like 1000, 5000, 3425252, and so on
+# if you have to store numberic from 0 to 500 you would be better off with a list
+
+number_dict = dict(zip(food, numbers))
+print(number_dict)
+# in effect we have built indexes both ways
+
+
+my_counter = {key:0 for key in food}  # set default value to 0
+print(my_counter)
+
+# so now I could loop through my food and adjust the counter dictionary
+
 # #
 # # # so how to adjust values in dictionary
 # blank_dict = {}
@@ -273,13 +304,20 @@
 # #
 # # # we can remove from original by going through copy
 # # # # # # print(tel.items())
-# print(tel)
+print(tel)
 # # #
 # # # # # # # # # # idea to set key value pair UNLESS it is already set
-# tel.setdefault("rūta", 2911)
-# print(tel)
-# tel.setdefault("rūta", 5555) # so this will not run because "rūta" is already set
-# print(tel)
+del(tel["rūta"])
+print(tel)
+
+# so setdefault is a good way to set a value UNLESS it is already set
+tel.setdefault("rūta", 2911)
+print(tel)
+tel.setdefault("rūta", 5555) # so this will not run because "rūta" is already set
+print(tel)
+tel.setdefault("maija", 2911)
+print(tel)
+
 # # # # in other words I save one if (it is done by Python)
 # # # tel["rūta"] = 1001 # so this will always work, overwriting or not
 # # # print(tel)
@@ -287,21 +325,23 @@
 # # # # # tel["valdis"] = 2911 # so changing value
 # # # # # print(tel)
 # # #
-# value_to_find = 2911
-# new_dict = {} # empty dict to hold both key and value
-# names_with_1001 = [] # empty list to hold just the names/keys, not really needed
+value_to_find = 2911  # so called needle
+new_dict = {} # empty dict to hold both key and value
+names_with_1001 = [] # empty list to hold just the names/keys, not really needed
 # # #
 # # # # # so filtering for values in a dictionary
-# for key, value in tel.items():
-#     if value == value_to_find:
-#         print(f"Match for {value} found! The key to be added is {key}")
-#         new_dict[key] = value # setdefault would also work
-#         names_with_1001.append(key) # saving just the names in a list
+for key, value in tel.items():
+    if value == value_to_find:
+        print(f"Match for {value} found! The key to be added is {key}")
+        new_dict[key] = value # setdefault would also work
+        names_with_1001.append(key) # saving just the names in a list
 # # #
-# print(new_dict)
-# print(names_with_1001, list(new_dict.keys()))
+print(new_dict)
+print(names_with_1001, list(new_dict.keys()))
 
-# new_dict_again = {key:value for key,value in tel.items() if value == value_to_find}
+# i could do the same with a dictionary comprehension
+new_dict_again = {key:value for key,value in tel.items() if value == value_to_find}
+print(new_dict_again)
 # print(new_dict)
 # # #
 # # # # # # # # # delete
@@ -350,29 +390,36 @@
 # # # # # # tel.setdefault('pēteris', 2911)
 # # # # # # # # # # # # the above will not overwrite unlike tel['pēteris'] = 2911
 # # #
-# # # # # # # # complete clearing of dictionary
-# tel.clear()  # IN PLACE will clear the dictionary
-# print(tel)
-# # #
-# common_phone = 1888
-# keys = ["Valdis","Līga","Rūta", "Maija"]
+# dictionary update with another dictionary
+tel.update({"pēteris": 2911, "valdis": 2911, "rūta": 2911})
+print(tel)
+popped_value = tel.pop("pēteris") # so this will remove and return the value
+print(popped_value)
+print(tel)
 
-# for key in keys:
-#     tel.setdefault(key, common_phone) # could also use tel[key] = common_phone
-# print(tel)
+# # # # # # # # complete clearing of dictionary
+tel.clear()  # IN PLACE will clear the dictionary
+print(tel)
+# # #
+common_phone = 1888
+keys = ["Valdis","Līga","Rūta", "Maija"]
+
+for key in keys:
+    tel.setdefault(key, common_phone) # could also use tel[key] = common_phone
+print(tel)
 # # #
 # # # # # # # # dictionary comprehension to do the above loop
-# new_dict = {key:common_phone for key in keys}
-# print(new_dict)
+new_dict = {key:common_phone for key in keys}
+print(new_dict)
 # # #
 # # # # # #how about making a dictionary of each character and their ASCII/UNICODE codes
-# # # # # print(ord("a"))
-# import string
-# letters = string.ascii_letters
-# print(letters)
+print(ord("a"))
+import string # this is a library of constants for strings
+letters = string.ascii_letters
+print(letters)
 # # #
-# letter_dictionary = {k:ord(k) for k in letters }
-# print(letter_dictionary)
+letter_dictionary = {k:ord(k) for k in letters }
+print(letter_dictionary)
 # # #
 # letter_dictionary_2 = {k:ord(k) for k in "Raibi ruņči rīgā rūc"}
 # print(letter_dictionary_2)
