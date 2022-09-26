@@ -51,3 +51,28 @@
 
 # the trickiest case is something like this
 # get_city_year(1000, -3, 50, 2000) -> -1 is the correct answer but how to get there?
+
+def get_city_year(p0, perc, delta, target_p):
+    current_number = p0
+    my_counter=0
+    if p0 >= target_p:
+        return 0
+    # could use else: but I prefer a flatter structure
+    while current_number < target_p:
+        growth = int(current_number*perc/100+delta) # humans are not floats! :)
+        if growth <= 0: # stagnation or decline
+            print(f"stagnation or decline after {my_counter} years at {current_number}")
+            return - 1
+        current_number = current_number + growth 
+        my_counter += 1
+    
+    return my_counter
+
+print(get_city_year(1000, 2, -50, 5000)) # -> -1
+
+print(get_city_year(1500, 5, 100, 5000)) # -> 15
+
+print(get_city_year(1500000, 2.5, 10000, 2_000_000)) # -> 10
+
+# but there is a problem with this code, it does not work for this case
+print(get_city_year(1000, -3, 50, 2000)) # -> -1 is the correct answer but how to get there?
