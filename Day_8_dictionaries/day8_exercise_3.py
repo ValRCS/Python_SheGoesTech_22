@@ -50,3 +50,5 @@ def clean_dict_value_2(d, bad_val):
 also_new_dict = clean_dict_value_2(my_dict, 5)
 print(also_new_dict)
 print(my_dict)
+
+# TODO 3b clean dict values from list
