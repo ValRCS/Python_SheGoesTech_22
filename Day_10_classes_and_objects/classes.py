@@ -493,3 +493,18 @@ maggies_garage.add_nails(33).simple_print()
 print(maggies_garage.count_my_nails())
 lisa_garage = SimpleGarage()
 print(lisa_garage)
+
+
+class Person:
+    def __init__(self, name, age, hobbies):
+        self.name = name
+        self.age = age
+        self.hobbies = hobbies
+
+valdis = Person("Valdis", 49, ["Python", "Cycling", "Chess"])
+
+print(valdis.age)
+print(valdis.hobbies)
+print(valdis.name)
+
+# alternative would be to use a dictionary
