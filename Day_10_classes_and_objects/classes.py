@@ -508,3 +508,101 @@ print(valdis.hobbies)
 print(valdis.name)
 
 # alternative would be to use a dictionary
+
+# animal Class without __init__
+class Animal:
+    # legs = 4
+    # tail = True
+    # can_fly = False
+    # nickname = "Fluffy"
+    # eats_meat = True
+    # i like using sane common default values whenever possible
+    def __init__(self, legs=4, tail=True, can_fly=False, nickname="", eats_meat=True):
+        self.legs = legs
+        self.tail = tail
+        self.can_fly = can_fly
+        self.nickname = nickname
+        self.eats_meat = eats_meat
+
+    def make_noise(self):
+        print(f"Animal Noise from {self.nickname}")
+
+# print uses __str__ - the human readable representation of the object
+    def __str__(self):
+        return f"{self.nickname} is an animal with {self.legs} legs and {self.tail} tail"   
+
+# __repr__ is the machine readable representation of the object used by list etc
+    def __repr__(self):
+        return f"Animal({self.legs}, {self.tail}, {self.can_fly}, {self.nickname}, {self.eats_meat})"
+
+tom = Animal(legs=4, tail=True, can_fly=False, nickname="Tom", eats_meat=True) # so tom is an instance of Animal class
+print(tom.legs)
+print(tom.tail)
+print("Can Fly?", tom.can_fly)
+print("Eats meat?", tom.eats_meat)
+tom.is_cat = True # you can add more attributes to the object later on
+# not good practice to add attributes to the object after it has been created but you can do it
+
+# the downside is if you need to have very different animals
+# then you would have to have a lot of attributes
+# and constructor would come in handy
+
+# I could use a dictionary instead
+jerry = {"legs": 4, "tail": True, "can_fly": False, "nickname": "Jerry", "eats_meat": True}
+print(jerry["legs"])
+print(jerry["tail"])
+print(jerry["nickname"])
+
+# what happens if we want to add methods to our class?
+# theoretically we could add methods to dictionary but more complex
+
+
+chipmunk = Animal(nickname="Alvin", eats_meat=False)
+print(chipmunk.nickname)
+print(f"Chipmunk {chipmunk.nickname} eats meat? {chipmunk.eats_meat}")
+
+print(chipmunk)
+print(tom)
+
+# so i can produce 10 no name animals and store them in a list
+animal_list = [Animal(nickname=f"Animal No. {i}") for i in range(1,11)]
+print(animal_list)
+print(animal_list[0])
+
+class GPS:
+    def __init__(self, location="Riga"):
+        self.location = location
+
+class Car:
+    def __init__(self, make="Opel", model="Astra", year=2015, color="Silver", gps=GPS()):
+        self.make = make
+        self.model = model
+        self.year = year
+        self.color = color
+        self.gps = gps  #my car has a gps object
+
+my_car = Car(make="VW", model="Golf", year=2019, color="Black", gps=GPS(location="Berlin"))
+
+print(my_car.gps.location)
+
+# multiple inheritance is possible
+# you can inherit from multiple classes
+# but you should be careful with it
+# it can get complicated
+
+class Frankenstein(Animal, Car):
+    # we have two __init__ methods so we need to call both
+    def __init__(self, legs=4, tail=True, can_fly=False, nickname="", eats_meat=True, make="Opel", model="Astra", year=2015, color="Silver", gps=GPS()):
+        # ihave to call both __init__ methods
+        Animal.__init__(self, legs, tail, can_fly, nickname, eats_meat)
+        Car.__init__(self, make, model, year, color, gps)
+
+
+# so Frankenstein has all the attributes from Animal and Car
+monster = Frankenstein(nickname="Frank", eats_meat=False, make="VW", model="Golf", year=2019, color="Black", gps=GPS(location="Berlin"))
+print(monster.nickname)
+print("Eats meat?", monster.eats_meat)
+print(monster.make)
+print(monster.gps.location)
+monster.make_noise() # again self is automatically passed to the method
+
