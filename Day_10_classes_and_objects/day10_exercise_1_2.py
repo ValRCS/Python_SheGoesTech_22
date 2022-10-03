@@ -27,6 +27,7 @@ class Song:
 
     # so private function for internal use only
     # we lose some customizability but we gain some security
+    # it could have been public but we don't want to expose it with no need
     def __print_song_info(self):
         print(f"Song by {self.author} called {self.title}")
 
