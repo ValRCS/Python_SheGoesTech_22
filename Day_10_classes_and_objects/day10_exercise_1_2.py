@@ -16,6 +16,23 @@
 
 #  print on the screen "New Song made" - (try also printing here author and title!)
 
+class Song:
+    def __init__(self, title="", author="", lyrics=()):
+        self.title = title
+        self.author = author
+        self.lyrics = lyrics
+        print(f"New Song made by {self.author} called {self.title}")
+
+    def sing(self):
+        print(f"Singing song by {self.author} called {self.title}")
+        for line in self.lyrics:
+            print(line)
+
+    def yell(self):
+        print(f"Yelling song by {self.author} called {self.title}")
+        for line in self.lyrics:
+            print(line.upper())
+
 # Minimum:
 
 # Write a method sing that prints the song line by line on the screen, first printing the author and title, if any.
@@ -30,11 +47,11 @@
 
 # Example:
 
+blank_song = Song()
+ziemelmeita = Song("Ziemeļmeita", "Jumprava", ["Gāju meklēt ziemeļmeitu","Garu, tālu ceļu veicu"])
 
-# ziemelmeita = Song("Ziemeļmeita", "Jumprava", ["Gāju meklēt ziemeļmeitu","
-# Garu, tālu ceļu veicu"])
-
-# ziemelmeita.sing(1).yell()
+ziemelmeita.sing()
+ziemelmeita.yell()
 
 # Outputs:
 
