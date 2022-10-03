@@ -41,5 +41,70 @@
 
 # # you can add other methods and/or attributes if you wish to Deck class
 
+# example usage:
+# my_deck = Deck()
+# print(my_deck.available) # 52
+# print(my_deck.spent) # 0
+# my_deck.shuffle() # shuffles available
+# print(my_deck.available) # 52
+# print(my_deck.spent) # 0
+# my_cards = my_deck.get_cards(5) # gets 5 cards from available
+# print(my_cards) # 5 cards like (3, 'hearts ♥'), (6, 'diamonds ♦'), (3, 'spades ♠'), (5, 'clubs ♣'), (7, 'hearts ♥'
+# single_card = my_deck.get_cards() # gets 1 card from available
+# print(single_card) # 1 card like (4, 'diamonds ♦')
+# print(my_deck.available) # 46 because we got 6 cards
+# print(my_deck.spent) # 6 because we got 6 cards
 
 # 3. create a new deck in a different .py file from where Deck() is located, that means use import !
+
+# import random
+# import itertools
+
+# # def get_shuffled_cards():
+# #     var1 = ["A", "Jack", "Queen","King"] + list(range(2,11))
+# #     var2 = ["diamonds ♦", "hearts ♥", "spades ♠", "clubs ♣"]
+# #     cards = list(itertools.product(var1, var2))
+# #     # cards_random = random.sample(cards, len(var1)*len(var2))
+# #     cards_random = random.sample(cards, len(cards))
+# #     return cards_random
+
+# # print(get_shuffled_cards())
+# # my_cards = get_shuffled_cards() # this will be a different list than the one above
+# # print(len(my_cards)) # should be 52
+# # print(len(set(my_cards)))  # so this is a set of unique cards should be 52
+
+# # def get_shuffled_cards():
+# #     my_values = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"]
+# #     my_cards = ["diamonds ♦", "hearts ♥", "spades ♠", "clubs ♣"]
+# #     # product using list comprehension
+# #     cards = [(value, suit) for value in my_values for suit in my_cards]
+# #     random.shuffle(cards)
+# #     return cards
+
+# # def get_shuffled_cards():
+# #     ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"] 
+# #     suits = ["diamonds ♦", "hearts ♥", "spades ♠", "clubs ♣"]
+# #     # this approach would be useful if you needed to add some extra logic
+# #     card_deck=[]
+# #     for i in suits:
+# #         for j in ranks:
+# #             pair = (j, i)
+# #             card_deck.append(pair)
+    
+# #     shuffled = random.sample(card_deck, len(card_deck))
+# #     return shuffled # so we return a list of tuples
+
+# def get_shuffled_cards():
+#     symbol = [2,3,4,5,6,7,8,9,10,"J","Q","K", "A"]
+#     colors = ['heart', 'diamonds', 'spades', 'clubs']
+#     cards = [(s, c) for s in symbol for c in colors]
+    
+#     random.shuffle(cards) # this shuffles cards in place
+#     return cards
+
+
+# # if __name__ == "__main__": is useful when you want to offer a module for import
+# #  but also want to be able to run it as a standalone program
+# if __name__ == '__main__':
+#     cards = get_shuffled_cards()
+#     print(cards[:5])
