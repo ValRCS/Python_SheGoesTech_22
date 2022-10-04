@@ -7,7 +7,8 @@
 # # # # # # # # # # # usually we have Unicode today (encoding using UTF-8)
 # # # # # # # # # # # creating file object (file stream)
 # # # # # # # # # # # closing file automatically with with contextcd
-import os  # system library
+import os
+from re import L  # system library
 import string
 from datetime import datetime as dt  # datetime has datetime submodule(klase)
 from pathlib import Path  # this is newer for path manipulation
@@ -341,14 +342,20 @@ with open("frost_first_4_lines.txt", mode='a', encoding="utf-8") as fout:
 # #
 # # # # # # # # # with open('Diena_12_Faili/frost.txt', encoding="utf-8") as fin, open('frost-filtered.txt', mode="w",
 # # # encoding="utf-8") as fout:
-# # recipe for opening and writing huge files
-# with open('frost.txt', encoding="utf-8") as fin, open("frost_a4.txt", mode="w", encoding="utf-8") as file_out:
-#     for line in fin:  # for each line in incoming file
-#         # will work even on huge files because you do not need to
-#         # store all in memory
-#         if line.startswith("And"):  # check some condition could be very complicated
-#             # we could do more text processing here
-#             file_out.write(line)  # write into outgoing file
+
+# so when we have big files they might not fit into memory - RAM
+# so we need to read and write in chunks
+# # recipe for opening and writing huge files as long as lines are not too long
+# line/row is a string which ends with \n
+# so imagine this frost.txt file is 1GB or even 10GB or 100GB
+with open('frost.txt', encoding="utf-8") as fin, open("frost_a4.txt", mode="w", encoding="utf-8") as file_out:
+    for line in fin:  # for each line in incoming file
+        # will work even on huge files because you do not need to
+        # store all in memory
+        # if line.startswith("And"):  # check some condition could be very complicated
+        if "and" in line:  # check some condition could be very complicated
+            # we could do more text processing here
+            file_out.write(line)  # write into outgoing file
 # # so here both files will be closed and ready to be used
 # # #
 # # # # # # # with open('frost.txt', encoding="utf-8") as fin, open('frost-yelling.txt', mode="w", encoding="utf-8") as
@@ -395,3 +402,15 @@ with open("frost_first_4_lines.txt", mode='a', encoding="utf-8") as fout:
 # # #
 # # # # with open(big_file_path, mode="w", encoding="utf-8") as fout:
 # # # #     fout.write(f"\n\n{now}\n\n".join([open(f, encoding="utf-8").read() for f in all_but_big]))
+
+# Python open modes
+# r - read - default
+# w - write
+# a - append
+# r+ - read and write - not recommended
+# w+ - write and read - not recommended
+# a+ - append and read - not recommended
+# b - binary
+# t - text - default
+# + - read and write
+# documentation https://docs.python.org/3/library/functions.html#open
