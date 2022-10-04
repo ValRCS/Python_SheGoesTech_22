@@ -414,3 +414,26 @@ with open('frost.txt', encoding="utf-8") as fin, open("frost_a4.txt", mode="w", 
 # t - text - default
 # + - read and write
 # documentation https://docs.python.org/3/library/functions.html#open
+
+# using Path read current absolute path
+print(Path().absolute()) # empty parameters are the current path
+# alternative to get current path with os module 
+print(os.getcwd())
+
+# prints the same but Path version will handle OS specific path separators better
+
+
+# reading data from website is a big topic which we will handle later
+# for now we will just read some text file from the web
+url = "https://www.gutenberg.org/files/1661/1661-0.txt"
+# read file from url using standard library
+
+import urllib.request # this is a standard library
+# i had to import request module from urllib library
+# i use with to automatically close the connection when I am done
+with urllib.request.urlopen(url) as response:
+    text = response.read().decode("utf-8")
+print(text[:1000])
+# now I can save text to file
+with open("sherlock.txt", mode="w", encoding="utf-8") as f:
+    f.write(text)
