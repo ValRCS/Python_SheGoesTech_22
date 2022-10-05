@@ -34,3 +34,22 @@
 # a dependency is a piece of software that another piece of software needs to work.
 # for example, the camelcase package depends on the pyparsing package, which is another package that needs to be installed.
 # so if you install the camelcase package, pip will automatically install the pyparsing package for you.
+
+# useful external library is tqdm
+# tqdm is a progress bar library with good support for nested loops and Jupyter/IPython notebooks.
+# tqdm is used to display a progress bar for a loop.
+# example:
+from tqdm import tqdm
+for i in tqdm(range(10_000_000)):
+    pass # pass is a blank instruction
+# you can use tqdm to wrap any iterable, not just range().
+# example:
+# for i in tqdm(range(1_000_000), desc="1st loop"):
+#     for j in tqdm(range(100_000), desc="2nd loop"):
+#         pass
+numbers = list(range(1_000_000))
+total = 0
+for number in tqdm(numbers, desc="1st loop"):
+    total += number
+# of course we could have used the sum() function, but this is just an example.
+print(total)
