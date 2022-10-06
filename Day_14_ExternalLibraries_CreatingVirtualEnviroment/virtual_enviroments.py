@@ -10,6 +10,7 @@
 # python -m venv myenv 
 # typically I use
 # python -m venv venv
+# good idea to add venv to .gitignore
 # This will create a folder called myenv, with all the necessary executables to use the packages that a venv contains.
 # To start using the virtual environment, it needs to be activated:
 # myenv\Scripts\activate

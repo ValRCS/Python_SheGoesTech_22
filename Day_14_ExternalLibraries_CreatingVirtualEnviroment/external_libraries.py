@@ -39,17 +39,22 @@
 # tqdm is a progress bar library with good support for nested loops and Jupyter/IPython notebooks.
 # tqdm is used to display a progress bar for a loop.
 # example:
-from tqdm import tqdm
-for i in tqdm(range(10_000_000)):
-    pass # pass is a blank instruction
-# you can use tqdm to wrap any iterable, not just range().
-# example:
-# for i in tqdm(range(1_000_000), desc="1st loop"):
-#     for j in tqdm(range(100_000), desc="2nd loop"):
-#         pass
-numbers = list(range(1_000_000))
-total = 0
-for number in tqdm(numbers, desc="1st loop"):
-    total += number
-# of course we could have used the sum() function, but this is just an example.
-print(total)
+# from tqdm import tqdm
+# # for i in tqdm(range(10_000_000)):
+# #     pass # pass is a blank instruction
+# # you can use tqdm to wrap any iterable, not just range().
+# # example:
+# # for i in tqdm(range(1_000_000), desc="1st loop"):
+# #     for j in tqdm(range(100_000), desc="2nd loop"):
+# #         pass
+# numbers = list(range(1_000_000))
+# total = 0
+# for number in tqdm(numbers, desc="1st loop"):
+#     total += number
+# # of course we could have used the sum() function, but this is just an example.
+# print(total)
+print("Just a simple print hello")
+import camelcase
+c = camelcase.CamelCase()
+txt = "hello world this is a test"
+print(c.hump(txt))
