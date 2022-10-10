@@ -15,6 +15,8 @@
 
 # pip install jupyter
 
+# Visual Studio will automatically prompt and  install the Jupyter extension for you.
+
 # How to run Jupyter Notebooks?
 
 # jupyter notebook
