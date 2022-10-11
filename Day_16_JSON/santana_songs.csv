@@ -1,0 +1,76 @@
+id,type,title,artist,chordsPresent,tabTypes
+17608,Song,Smooth,Carlos Santana,True,"['PLAYER', 'TEXT_GUITAR_TAB', 'CHORDS']"
+451,Song,Europa,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+357,Song,Black Magic Woman,Carlos Santana,True,"['PLAYER', 'TEXT_GUITAR_TAB', 'CHORDS']"
+461961,Song,Smooth accurate,Santana,False,['PLAYER']
+408283,Song,Jungle Strut,Carlos Santana,False,['PLAYER']
+23164,Song,Into The Night (Ft. Chad Kroeger),Carlos Santana,False,['PLAYER']
+408286,Song,She's Not There,Carlos Santana,False,['PLAYER']
+17329,Song,Samba Pa Ti,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+408287,Song,Hope You're Feeling Better,Carlos Santana,False,['PLAYER']
+23842,Song,Maria Maria,Carlos Santana,True,"['PLAYER', 'TEXT_GUITAR_TAB', 'CHORDS']"
+17491,Song,Corazon Espinado,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+408284,Song,Se A Cabo,Carlos Santana,False,['PLAYER']
+61155,Song,Oye Como Va,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+92229,Song,Europa,Carlos Santana,False,"['PLAYER', 'TEXT_BASS_TAB']"
+17440,Song,Song Of The Wind,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+18236,Song,Chill Out,Carlos Santana,True,"['PLAYER', 'TEXT_GUITAR_TAB', 'CHORDS']"
+17687,Song,El Farol,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+17659,Song,Moonflower,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+17534,Song,Game Of Love,Carlos Santana,True,"['PLAYER', 'TEXT_GUITAR_TAB', 'CHORDS']"
+17489,Song,Hold On,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+17759,Song,Sensitive Kind,Carlos Santana,True,"['PLAYER', 'TEXT_GUITAR_TAB', 'CHORDS']"
+17673,Song,Why Don't You & I,Carlos Santana,False,['PLAYER']
+17523,Song,Everybody's Everything,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+17500,Song,Move On,Carlos Santana,False,['PLAYER']
+17666,Song,Victory Is Won,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+18115,Song,Migra,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+17443,Song,The Calling,Carlos Santana,False,['PLAYER']
+18476,Song,(Da Le) Yaleo,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+386,Song,Evil Ways,Carlos Santana,True,"['PLAYER', 'TEXT_GUITAR_TAB', 'CHORDS']"
+17533,Song,Soul Sacrifice,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+17684,Song,Foo Foo,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+27942,Song,Open Invitation,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+27938,Song,America,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+513336,Song,The Game of Love,Santana,False,['PLAYER']
+17421,Song,Primavera,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+17674,Song,Africa Bamba,Carlos Santana,True,"['PLAYER', 'TEXT_GUITAR_TAB', 'CHORDS']"
+23551,Song,Put Your Lights On,Carlos Santana,True,"['PLAYER', 'TEXT_GUITAR_TAB', 'CHORDS']"
+27949,Song,Feel Better,Carlos Santana,False,['PLAYER']
+32346,Song,Into The Night,Carlos Santana,True,"['PLAYER', 'TEXT_GUITAR_TAB', 'CHORDS']"
+62375,Song,Voce Nao Sabe O Que E O Amor,Luan Santana,False,['PLAYER']
+66904,Song,Hoy Es Adios,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+81573,Song,Carnaval (Basic Frame Work),Carlos Santana,False,['PLAYER']
+87057,Song,Bella,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+87607,Song,Europa (Acoustic),Carlos Santana,False,['PLAYER']
+89586,Song,Magic Black Woman,Carlos Santana,False,['PLAYER']
+92327,Song,Just Feel Better,Carlos Santana,True,"['PLAYER', 'TEXT_GUITAR_TAB', 'CHORDS']"
+269287,Song,Just Feel Better (Ft. Steven Tyler),Carlos Santana,False,['PLAYER']
+388427,Song,Gypsy Queen,Carlos Santana,False,['PLAYER']
+388491,Song,Game Of Love,Carlos Santana,False,['PLAYER']
+389282,Song,Samba Pa Ti,Carlos Santana,False,['PLAYER']
+395487,Song,Smooth,Carlos Santana / Rob Thomas,False,['PLAYER']
+401774,Song,Black Magic Woman (Santana Cover),Rubén,False,['PLAYER']
+408278,Song,Let The Children Play,Carlos Santana,False,['PLAYER']
+408279,Song,Las Mananitas,Carlos Santana,False,['PLAYER']
+408280,Song,Jingo,Carlos Santana,False,['PLAYER']
+408281,Song,Incident At Neshabur,Carlos Santana,False,['PLAYER']
+408282,Song,Hannibal,Carlos Santana,False,['PLAYER']
+408285,Song,Curacion Sunlight On Water,Carlos Santana,False,['PLAYER']
+408288,Song,Persuasion,Carlos Santana,False,['PLAYER']
+408289,Song,Naima Featuring John Mclaughlin,Carlos Santana,False,['PLAYER']
+408290,Song,Everythings Coming Our Way,Carlos Santana,False,['PLAYER']
+408291,Song,Toussaint Louverture,Carlos Santana,False,['PLAYER']
+18380,Song,Flor D'luna,Carlos Santana,False,"['PLAYER', 'TEXT_GUITAR_TAB']"
+435559,Song,Oye Como Va,Santana,False,['PLAYER']
+437635,Song,Woman,Carlos Santana,False,['PLAYER']
+440836,Song,Amar Não É Pecado,Luan Santana,False,['PLAYER']
+17847,Song,I Love You Too Much,Carlos Santana,False,['PLAYER']
+480051,Song,moonflower,Santana,False,['PLAYER']
+480922,Song,i love you too much,Santana,False,['PLAYER']
+480924,Song,i love you to much,Santana,False,['PLAYER']
+484460,Song,Jingo (Ji-Go-Lo-Ba),Santana,False,['PLAYER']
+490046,Song,Europa (live),Carlos Santana,False,['PLAYER']
+490281,Song,DATE 2/Your Name OST,Kadu Santana,False,['PLAYER']
+494290,Song,Samba pa ti - lección,Lorenzo - Santana,False,['PLAYER']
+513335,Song,The Game of Love,Santana,False,['PLAYER']
