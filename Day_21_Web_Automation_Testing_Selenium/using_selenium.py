@@ -2,7 +2,9 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 
-browser = webdriver.Firefox()
+# browser = webdriver.Firefox()
+# browser = webdriver.Safari() # Mac
+browser = webdriver.Chrome()
 
 browser.get('http://www.yahoo.com')
 assert 'Yahoo' in browser.title  # assert that we got the right page
