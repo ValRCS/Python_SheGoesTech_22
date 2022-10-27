@@ -1,6 +1,5 @@
 # TODO: the following 5 functions for CRUD(create, read,update,delete) operations that work with sqlite database called chinook.db
-# Database is here: https://prosemind.com/mod/resource/view.php?id=88
-# ER diagram is here: https://prosemind.com/mod/page/view.php?id=89
+
 # def create_connection(dbpath):
 #   # can add verbose parameter that prints sqlite version used
 #   return conn
