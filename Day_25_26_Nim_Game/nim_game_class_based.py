@@ -34,6 +34,15 @@ class ComputerPlayer:
         return random.randint(min_remove, max_remove)
 
     def _smart_strategy(self, match_count, min_remove, max_remove):
+        # https://en.wikipedia.org/wiki/Nim
+        # so if we have one match left we can remove it and we lose
+        # if we have two matches left we can remove one and we win!
+        # if we have three matches left we can remove two and we win!
+        # if we have four matches left we can remove three and we win!
+
+        # so we will use module/remainder operator to check if we have a winning move
+        # if we have a winning move we will take it
+        # if we do not have a winning move we will take a random move
         reminder = match_count % (max_remove + 1)
                 # let's refactor our strategy using match syntax in Python 3.10
         match reminder:
