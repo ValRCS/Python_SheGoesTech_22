@@ -15,6 +15,7 @@
 # we could have a class to manage database interactions
 
 import random
+from re import M
 # we could have created a general Player class
 
 # for now we will add a ComputerPlayer class
@@ -22,8 +23,35 @@ class ComputerPlayer:
     # constructor
 
 
-    def __init__(self, name):
+    def __init__(self, name, level=2):
         self.name = name
+        self.level = level # how smart is our computer player?
+
+    def _fixed_strategy(self, match_count, min_remove, max_remove):
+        return 2 # really bad strategy
+
+    def _random_strategy(self, match_count, min_remove, max_remove):
+        return random.randint(min_remove, max_remove)
+
+    def _smart_strategy(self, match_count, min_remove, max_remove):
+        reminder = match_count % (max_remove + 1)
+                # let's refactor our strategy using match syntax in Python 3.10
+        match reminder:
+            case 0: # we win
+                return max_remove # 3
+            case 1: # we lose if we remove one match
+                return random.randint(min_remove, max_remove)
+            case 2: # we win
+                return 1 # so opponent will be left with one match
+            case 3: # we win
+                return 2 # so opponent will be left with one match again
+            # default case, here we do not need it because we covered all cases
+            # case _: 
+            #     return None # return someting in default case
+        # match syntax is very useful for pattern matching
+        # https://docs.python.org/3.10/whatsnew/3.10.html#pep-634-structural-pattern-matching
+        # tutorial on pattern matching
+        # https://realpython.com/python-3-10-new-features/#structural-pattern-matching-with-match
 
     # we will add a method to get the number of matches to remove
     # for now we will just return a random number
@@ -33,8 +61,46 @@ class ComputerPlayer:
         # hint there is a winning strategy for nim 
         # in case you are interested in learning more about nim
         # https://en.wikipedia.org/wiki/Nim
-        # if computer is losing it should try to make a random move to confuse the player
-        return random.randint(min_remove, max_remove)
+        # so if we have one match left we can remove it and we lose
+        # if we have two matches left we can remove one and we win!
+        # if we have three matches left we can remove two and we win!
+        # if we have four matches left we can remove three and we win!
+
+        # so we will use module/remainder operator to check if we have a winning move
+        # if we have a winning move we will take it
+        # if we do not have a winning move we will take a random move
+
+        # we will use the random module to generate a random number
+        reminder = match_count % (max_remove + 1)
+        # if reminder == 0:
+        #     # we have a winning move
+        #     return max_remove # 3
+        # elif reminder == 1: # we lose if we remove one match
+        #     # we try confusing the opponent
+        #     return random.randint(min_remove, max_remove)
+        # elif reminder == 2:
+        #     # we have a winning move
+        #     return 1 # so opponent will be left with one match
+        # else: # reminder == 3
+        #     # we have a winning move
+        #     return 2 # so opponent will be left with one match again
+        # let's refactor our strategy using match syntax in Python 3.10
+        match reminder:
+            case 0: # we win
+                return max_remove # 3
+            case 1: # we lose if we remove one match
+                return random.randint(min_remove, max_remove)
+            case 2: # we win
+                return 1 # so opponent will be left with one match
+            case 3: # we win
+                return 2 # so opponent will be left with one match again
+            # default case, here we do not need it because we covered all cases
+            # case _: 
+            #     return None # return someting in default case
+        # match syntax is very useful for pattern matching
+        # https://docs.python.org/3.10/whatsnew/3.10.html#pep-634-structural-pattern-matching
+        # tutorial on pattern matching
+        # https://realpython.com/python-3-10-new-features/#structural-pattern-matching-with-match
 
 
 class HumanPlayer:
@@ -141,7 +207,7 @@ if __name__ == "__main__":
     player_a = HumanPlayer("Valdis")
     player_b = ComputerPlayer("Alpha Nim") # Google made AlphaGo and AlphaZero for chess and Go
 
-    game = NimGame(player_a=player_a, player_b=player_b) # using default values
+    game = NimGame(player_a=player_a, player_b=player_b,match_count=20) # using default values
     game.play()
     # we could clean up by using del game
     # but python will clean up for us since we are closing the program anyway
