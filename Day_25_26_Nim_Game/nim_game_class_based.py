@@ -15,7 +15,7 @@
 # we could have a class to manage database interactions
 
 import random
-from re import M
+
 # we could have created a general Player class
 
 # for now we will add a ComputerPlayer class
@@ -27,10 +27,17 @@ class ComputerPlayer:
         self.name = name
         self.level = level # how smart is our computer player?
 
-    def _fixed_strategy(self, match_count, min_remove, max_remove):
+    # i am using _ for our strategy methods
+    # because we do not want to call them directly
+    # we will call them from get_move method !
+    # technically we could call them directly from outside the class
+    # single _ is a convention to indicate that a method is private
+    # if we really wanted to hide our methods we could use double __
+
+    def _fixed_strategy(self):
         return 2 # really bad strategy
 
-    def _random_strategy(self, match_count, min_remove, max_remove):
+    def _random_strategy(self,min_remove, max_remove):
         return random.randint(min_remove, max_remove)
 
     def _smart_strategy(self, match_count, min_remove, max_remove):
@@ -65,51 +72,17 @@ class ComputerPlayer:
     # we will add a method to get the number of matches to remove
     # for now we will just return a random number
     def get_move(self, match_count, min_remove, max_remove):
-        # this is a very random computer player :) does not care about match_count...
-        # TODO come up with a better strategy for the computer player
-        # hint there is a winning strategy for nim 
-        # in case you are interested in learning more about nim
-        # https://en.wikipedia.org/wiki/Nim
-        # so if we have one match left we can remove it and we lose
-        # if we have two matches left we can remove one and we win!
-        # if we have three matches left we can remove two and we win!
-        # if we have four matches left we can remove three and we win!
-
-        # so we will use module/remainder operator to check if we have a winning move
-        # if we have a winning move we will take it
-        # if we do not have a winning move we will take a random move
-
-        # we will use the random module to generate a random number
-        reminder = match_count % (max_remove + 1)
-        # if reminder == 0:
-        #     # we have a winning move
-        #     return max_remove # 3
-        # elif reminder == 1: # we lose if we remove one match
-        #     # we try confusing the opponent
-        #     return random.randint(min_remove, max_remove)
-        # elif reminder == 2:
-        #     # we have a winning move
-        #     return 1 # so opponent will be left with one match
-        # else: # reminder == 3
-        #     # we have a winning move
-        #     return 2 # so opponent will be left with one match again
-        # let's refactor our strategy using match syntax in Python 3.10
-        match reminder:
-            case 0: # we win
-                return max_remove # 3
-            case 1: # we lose if we remove one match
-                return random.randint(min_remove, max_remove)
-            case 2: # we win
-                return 1 # so opponent will be left with one match
-            case 3: # we win
-                return 2 # so opponent will be left with one match again
-            # default case, here we do not need it because we covered all cases
-            # case _: 
-            #     return None # return someting in default case
-        # match syntax is very useful for pattern matching
-        # https://docs.python.org/3.10/whatsnew/3.10.html#pep-634-structural-pattern-matching
-        # tutorial on pattern matching
-        # https://realpython.com/python-3-10-new-features/#structural-pattern-matching-with-match
+        match self.level:
+            case 1:
+                return self._fixed_strategy()
+            case 2:
+                return self._random_strategy(min_remove, max_remove)
+            case 3:
+                return self._smart_strategy(match_count, min_remove, max_remove)
+            # I could keep adding levels and strategies
+        # so match syntax is just like using if elif else, but it is more readable
+        # it is also more efficient because it does not evaluate all conditions
+        # also it is more flexible because we can match on more than just numbers
 
 
 class HumanPlayer:
