@@ -14,27 +14,35 @@
 # TODO we could use more classes to store data about the players for one
 # we could have a class to manage database interactions
 
-class NimGame:
+import random
+# we could have created a general Player class
+
+# for now we will add a ComputerPlayer class
+class ComputerPlayer:
     # constructor
-    # we will use some default values as well
-    def __init__(self, match_count=21, player_a_starts=True, min_matches=1, max_matches=3):
-        self.match_count = match_count
-        # TODO add heap functionality - that is keep track of multiple heaps and allow players to remove from any heap
-        self.is_player_a_turn = player_a_starts
-        self.min_matches = min_matches
-        self.max_matches = max_matches
-        print("Ready to play Nim!")
 
-    # we will use a method to get the player name
-    def get_player_name(self):
-        if self.is_player_a_turn:
-            return "Player A"
-        else:
-            return "Player B"
 
-    # we will use a method to get the player input
-    def get_player_input(self):
-        # notice we immediately cast to integer
+    def __init__(self, name):
+        self.name = name
+
+    # we will add a method to get the number of matches to remove
+    # for now we will just return a random number
+    def get_move(self, match_count, min_remove, max_remove):
+        # this is a very random computer player :) does not care about match_count...
+        # TODO come up with a better strategy for the computer player
+        # hint there is a winning strategy for nim 
+        # in case you are interested in learning more about nim
+        # https://en.wikipedia.org/wiki/Nim
+        # if computer is losing it should try to make a random move to confuse the player
+        return random.randint(min_remove, max_remove)
+
+
+class HumanPlayer:
+    def __init__(self, name):
+        self.name = name
+    
+    def get_move(self, match_count, min_remove, max_remove):
+                # notice we immediately cast to integer
         # TODO handle errors - it is very typical to add TODOS when writing code
         # so we enter an infinite loop
         # forcing the user to enter a valid input
@@ -43,16 +51,50 @@ class NimGame:
             try:
                 removed_matches = int(input("How many matches do you want to remove? "))
                 # TODO get rid of magic numbers
-                if removed_matches >= self.min_matches and removed_matches <= self.max_matches:
+                if removed_matches >= min_remove and removed_matches <= max_remove:
                     return removed_matches
                 else:
                     # this is a candidate for another method once it starts growin beyond a few lines
-                    allowed_moves = f"between {self.min_matches} and {self.max_matches}"
-                    move_list = list(range(self.min_matches, self.max_matches + 1))
+                    allowed_moves = f"between {min_remove} and {max_remove}"
+                    move_list = list(range(min_remove, max_remove + 1))
                     print(f"Allowed moves are {allowed_moves} or {move_list}")
-                    self.print_state()
+                    print(f"Current match count is {match_count}")
             except ValueError: # means our conversion to int failed
                 print("Please enter a number")
+
+    # TODO save move history
+
+class NimGame:
+    # constructor
+    # we will use some default values as well
+    # if you expect more than two players
+    # you would use a tuple or list to store the names
+    def __init__(self, player_a, player_b, match_count=21, player_a_starts=True, min_matches=1, max_matches=3):
+        self.match_count = match_count
+        # TODO add heap functionality - that is keep track of multiple heaps and allow players to remove from any heap
+        self.is_player_a_turn = player_a_starts
+        self.min_matches = min_matches
+        self.max_matches = max_matches
+        self.player_a = player_a
+        self.player_b = player_b
+        print("Player A is", self.player_a.name)
+        print("Player B is", self.player_b.name)
+        print("Ready to play Nim!")
+
+    # we will use a method to get the player name
+    def get_player_name(self):
+        if self.is_player_a_turn:
+            return self.player_a.name
+        else:
+            return self.player_b.name
+
+    # we will use a method to get the player input
+    def get_player_input(self):
+        if self.is_player_a_turn:
+            # we could pass a whole NimGame object to the player if you have too many arguments
+            return self.player_a.get_move(self.match_count, self.min_matches, self.max_matches) # we need to pass some data to the player
+        else:
+            return self.player_b.get_move(self.match_count, self.min_matches, self.max_matches)  # we need to pass some data to the player
 
     # we will use a method to update the state
     def update_state(self, removed_matches):
@@ -70,9 +112,10 @@ class NimGame:
     # we will use a method to print the winner
     def print_winner(self):
         if self.is_player_a_turn:
-            print("Player A wins!")
+            print(f"{self.player_a.name} wins!") # a because we already switched the turn
+            # TODO add a method to save the winner to the database
         else:
-            print("Player B wins!")
+            print(f"{self.player_b.name} wins!") 
 
     # we will use a method to play the game
     def play(self):
@@ -91,7 +134,14 @@ if __name__ == "__main__":
     # we call the constructor
     # we pass the arguments to the constructor
     # game = NimGame(21, True) # those are the defaults so we don't need to pass them
-    game = NimGame() # using default values
+    # TODO create players
+    # player_a = HumanPlayer("Valdis")
+    # player_b = HumanPlayer("Vitautas")
+
+    player_a = HumanPlayer("Valdis")
+    player_b = ComputerPlayer("Alpha Nim") # Google made AlphaGo and AlphaZero for chess and Go
+
+    game = NimGame(player_a=player_a, player_b=player_b) # using default values
     game.play()
     # we could clean up by using del game
     # but python will clean up for us since we are closing the program anyway
