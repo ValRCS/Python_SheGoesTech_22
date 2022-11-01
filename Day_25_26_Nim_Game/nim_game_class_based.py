@@ -17,10 +17,12 @@
 class NimGame:
     # constructor
     # we will use some default values as well
-    def __init__(self, match_count=21, player_a_starts=True):
+    def __init__(self, match_count=21, player_a_starts=True, min_matches=1, max_matches=3):
         self.match_count = match_count
         # TODO add heap functionality - that is keep track of multiple heaps and allow players to remove from any heap
         self.is_player_a_turn = player_a_starts
+        self.min_matches = min_matches
+        self.max_matches = max_matches
         print("Ready to play Nim!")
 
     # we will use a method to get the player name
@@ -34,7 +36,23 @@ class NimGame:
     def get_player_input(self):
         # notice we immediately cast to integer
         # TODO handle errors - it is very typical to add TODOS when writing code
-        return int(input("How many matches do you want to remove? "))
+        # so we enter an infinite loop
+        # forcing the user to enter a valid input
+        # we could also offer an option to quit
+        while True:
+            try:
+                removed_matches = int(input("How many matches do you want to remove? "))
+                # TODO get rid of magic numbers
+                if removed_matches >= self.min_matches and removed_matches <= self.max_matches:
+                    return removed_matches
+                else:
+                    # this is a candidate for another method once it starts growin beyond a few lines
+                    allowed_moves = f"between {self.min_matches} and {self.max_matches}"
+                    move_list = list(range(self.min_matches, self.max_matches + 1))
+                    print(f"Allowed moves are {allowed_moves} or {move_list}")
+                    self.print_state()
+            except ValueError: # means our conversion to int failed
+                print("Please enter a number")
 
     # we will use a method to update the state
     def update_state(self, removed_matches):
