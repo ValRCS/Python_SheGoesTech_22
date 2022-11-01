@@ -182,6 +182,7 @@ def return_players(default_computer_name="Alpha NIM"):
             break
     # we will use a tuple to return multiple values
     if player_b_name == "computer":
+        # TODO add prompt for computer level - Homework for Thursday
         return (HumanPlayer(player_a_name), ComputerPlayer(default_computer_name))
     else:
         return (HumanPlayer(player_a_name), HumanPlayer(player_b_name))
@@ -196,7 +197,7 @@ if __name__ == "__main__":
     game.play()
     # we could clean up by using del game
     # but python will clean up for us since we are closing the program anyway
-    # TODO add multiple game functionality
+    # TODO add multiple game functionality - Homework for Thursday
 
 # so for medium size application functions are a good choice
 # for large applications classes are a good choice
