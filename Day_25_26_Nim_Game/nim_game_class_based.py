@@ -11,8 +11,7 @@
 # with class based approach
 # functions are called methods and live inside the class
 
-# TODO we could use more classes to store data about the players for one
-# we could have a class to manage database interactions
+# TODO have a class to manage database interactions
 
 import random
 
@@ -90,15 +89,9 @@ class HumanPlayer:
         self.name = name
     
     def get_move(self, match_count, min_remove, max_remove):
-                # notice we immediately cast to integer
-        # TODO handle errors - it is very typical to add TODOS when writing code
-        # so we enter an infinite loop
-        # forcing the user to enter a valid input
-        # we could also offer an option to quit
         while True:
             try:
                 removed_matches = int(input("How many matches do you want to remove? "))
-                # TODO get rid of magic numbers
                 if removed_matches >= min_remove and removed_matches <= max_remove:
                     return removed_matches
                 else:
@@ -176,23 +169,34 @@ class NimGame:
 
         self.print_winner()
 
+
+def return_players(default_computer_name="Alpha NIM"):
+    # we will use a function to return the players
+    # we will use a while loop to keep asking for input until we get a valid input
+    while True:
+        player_a_name = input("Enter player A name: ")
+        player_b_name = input("Enter player B name or enter 'computer' for computer player: ")
+        if player_a_name == player_b_name:
+            print("Players must have different names")
+        else:
+            break
+    # we will use a tuple to return multiple values
+    if player_b_name == "computer":
+        return (HumanPlayer(player_a_name), ComputerPlayer(default_computer_name))
+    else:
+        return (HumanPlayer(player_a_name), HumanPlayer(player_b_name))
+
 # main guard - our main entry point
 if __name__ == "__main__":
     # we create an instance (object) of the class
-    # we call the constructor
-    # we pass the arguments to the constructor
-    # game = NimGame(21, True) # those are the defaults so we don't need to pass them
-    # TODO create players
-    # player_a = HumanPlayer("Valdis")
-    # player_b = HumanPlayer("Vitautas")
-
-    player_a = HumanPlayer("Valdis")
-    player_b = ComputerPlayer("Alpha Nim") # Google made AlphaGo and AlphaZero for chess and Go
-
-    game = NimGame(player_a=player_a, player_b=player_b,match_count=20) # using default values
+    # TODO read settings from a file such as match count, player names, etc.
+    player_a, player_b = return_players() # so we can have a human vs human or human vs computer
+    # in other words PvP or PvC - in gamer terms
+    game = NimGame(player_a=player_a, player_b=player_b,match_count=21) # using default values
     game.play()
     # we could clean up by using del game
     # but python will clean up for us since we are closing the program anyway
+    # TODO add multiple game functionality
 
 # so for medium size application functions are a good choice
 # for large applications classes are a good choice
