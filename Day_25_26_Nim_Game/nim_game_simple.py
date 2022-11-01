@@ -18,7 +18,7 @@ while match_count > 0:
         print("Player A's turn")
     else:
         print("Player B's turn")
-    # current mathch ount
+    # current match count
     print(f"There are {match_count} matches left")
     # for now there is no limit on how many matches can be removed
     # we will add that later
