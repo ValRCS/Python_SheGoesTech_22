@@ -11,6 +11,8 @@ match_count = 21
 is_player_a_turn = True
 
 # first implementation is a simple while loop
+# game loop is very typical
+# also could be a infinite loop with a break statement
 while match_count > 0:
     if is_player_a_turn:
         print("Player A's turn")
