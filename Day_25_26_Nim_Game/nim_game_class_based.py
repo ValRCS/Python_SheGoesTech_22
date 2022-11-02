@@ -174,6 +174,8 @@ class NimGame:
             self.update_state(removed_matches)
 
         self.print_winner()
+        self.db.insert_player(self.player_a.name)
+        self.db.insert_player(self.player_b.name)
         # this is where we could save the winner to the database
         # loser could be calculated from the winner
         # we could also save the move history - TODO

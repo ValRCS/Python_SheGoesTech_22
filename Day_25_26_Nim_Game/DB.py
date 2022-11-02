@@ -26,8 +26,12 @@ class DB:
         # create table
         # create table if not exists
         # create table if not exists nim (id integer primary key autoincrement, name text, age integer)
+        # name should be unique
+
         self.cursor.execute("""create table if not exists nim_players 
-            (id integer primary key autoincrement, name text, age integer)
+            (id integer primary key autoincrement, 
+            name text UNIQUE, 
+            age integer)
             """)
         self.conn.commit()
 
@@ -51,3 +55,16 @@ class DB:
         self._create_players_table()
         self._create_games_table()
         print("tables created if they did not exist - migration complete")
+
+    # insert player if not exists with name
+    def insert_player(self, name, age=0):
+        print(f"inserting player {name}")
+        # insert into nim_players (name, age) values ('John', 20)
+        # insert into nim_players (name, age) values ('John', 20) on conflict do nothing
+        # parametaized query
+        self.cursor.execute("""insert into nim_players (name, age) values (?, ?) 
+            on conflict do nothing""", (name, age))
+
+        self.conn.commit()
+
+    
