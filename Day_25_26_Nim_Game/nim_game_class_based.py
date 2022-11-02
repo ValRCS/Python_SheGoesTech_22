@@ -14,6 +14,7 @@
 # TODO have a class to manage database interactions
 
 import random
+import configparser
 
 # we could have created a general Player class
 
@@ -187,13 +188,52 @@ def return_players(default_computer_name="Alpha NIM"):
     else:
         return (HumanPlayer(player_a_name), HumanPlayer(player_b_name))
 
+def get_config(path = "nim.cfg"):
+    # we will use a function to read the config file
+    # we will use a dictionary to store the config values
+    config = {}
+    # we will use a try block to catch any errors
+    # we can use configparser to read the config file
+    # https://docs.python.org/3/library/configparser.html
+    # major alternative is to use json
+    # which we already covered in the previous classes
+    cfg = configparser.ConfigParser()
+
+    # documentation on read method
+    # https://docs.python.org/3/library/configparser.html#configparser.ConfigParser.read
+    # remember that path can be relative or absolute
+    # if relative then we need to know the current working directory
+    cfg.read(path)
+    # config["player_a_starts"] = cfg.getboolean("nim", "player_a_starts")
+    print(cfg)
+    # if you are worried about the key not being in the dictionary
+    # you can use the get method
+    # or you could use try except block
+    config["match_count"] = cfg.getint("DEFAULT", "starting_match_count")
+    config["min_matches"] = cfg.getint("DEFAULT", "min_matches")
+    config["max_matches"] = cfg.getint("DEFAULT", "max_matches")
+
+    # then we return the config dictionary
+    return config
+
 # main guard - our main entry point
 if __name__ == "__main__":
     # we create an instance (object) of the class
     # TODO read settings from a file such as match count, player names, etc.
+    my_config = get_config() # using default path
+    print(my_config)
     player_a, player_b = return_players() # so we can have a human vs human or human vs computer
     # in other words PvP or PvC - in gamer terms
-    game = NimGame(player_a=player_a, player_b=player_b,match_count=21) # using default values
+    # game = NimGame(player_a=player_a, player_b=player_b,match_count=21) # using default values
+    # in production unused code should be removed
+    # let's use the config values
+    # using ** to unpack the dictionary into keyword arguments
+    # i could have used values one by one such as 
+    # game = NimGame(player_a=player_a, player_b=player_b,match_count=my_config["match_count"], min_matches=my_config["min_matches"], max_matches=my_config["max_matches"])
+    # so if you do not want to pass the whole dictionary you can pass the values one by one as in the above example
+
+    game = NimGame(player_a=player_a, player_b=player_b, **my_config) # using config values
+    
     game.play()
     # we could clean up by using del game
     # but python will clean up for us since we are closing the program anyway
