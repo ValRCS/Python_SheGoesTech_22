@@ -15,6 +15,10 @@
 
 import random
 import configparser
+# we have a file named DB.py
+# and we have a class named DB
+# names do not have to match
+from DB import DB
 
 # we could have created a general Player class
 
@@ -111,7 +115,7 @@ class NimGame:
     # we will use some default values as well
     # if you expect more than two players
     # you would use a tuple or list to store the names
-    def __init__(self, player_a, player_b, match_count=21, player_a_starts=True, min_matches=1, max_matches=3):
+    def __init__(self, player_a, player_b, dbpath="nim.db", match_count=21, player_a_starts=True, min_matches=1, max_matches=3):
         self.match_count = match_count
         # TODO add heap functionality - that is keep track of multiple heaps and allow players to remove from any heap
         self.is_player_a_turn = player_a_starts
@@ -119,6 +123,7 @@ class NimGame:
         self.max_matches = max_matches
         self.player_a = player_a
         self.player_b = player_b
+        self.db = DB(dbpath) # this will hold a reference to our database object
         print("Player A is", self.player_a.name)
         print("Player B is", self.player_b.name)
         print("Ready to play Nim!")
@@ -169,6 +174,10 @@ class NimGame:
             self.update_state(removed_matches)
 
         self.print_winner()
+        # this is where we could save the winner to the database
+        # loser could be calculated from the winner
+        # we could also save the move history - TODO
+
 
 
 def return_players(default_computer_name="Alpha NIM"):
