@@ -64,7 +64,35 @@ class DB:
         # parametaized query
         self.cursor.execute("""insert into nim_players (name, age) values (?, ?) 
             on conflict do nothing""", (name, age))
+        # alternative would have been to read the data first and then insert if not exists
+        # self.cursor.execute("select * from nim_players where name = ?", (name,))
+        # data = self.cursor.fetchone()
+        # if data is None:
+        #     self.cursor.execute("insert into nim_players (name, age) values (?, ?)", (name, age))
+        # in any case UNIQUE constraint is a good idea to use on conflict do nothing
+        self.conn.commit()
 
+    # get player id by name
+    def get_player_id(self, name):
+        print(f"getting player id for {name}")
+        self.cursor.execute("select id from nim_players where name = ?", (name,))
+        data = self.cursor.fetchone() # we know of course that there will be only one row
+        # because of the UNIQUE constraint
+        if data is None:
+            return None # we could return -1 or 0 or raise an exception
+        else:
+            return data[0]
+
+    # insert game
+    def insert_game(self, player_a_id, player_b_id, game_type, game_result, game_date):
+        print(f"inserting game {game_type}")
+        # insert into nim_players (name, age) values ('John', 20)
+        # insert into nim_players (name, age) values ('John', 20) on conflict do nothing
+        # parametaized query
+        self.cursor.execute("""insert into nim_games (player_a_id, player_b_id, game_type, game_result, game_date) 
+            values (?, ?, ?, ?, ?)""", (player_a_id, player_b_id, game_type, game_result, game_date))
+        # TODO insert datetime from SQL function
+        
         self.conn.commit()
 
     

@@ -19,6 +19,7 @@ import configparser
 # and we have a class named DB
 # names do not have to match
 from DB import DB
+from datetime import datetime
 
 # we could have created a general Player class
 
@@ -176,6 +177,11 @@ class NimGame:
         self.print_winner()
         self.db.insert_player(self.player_a.name)
         self.db.insert_player(self.player_b.name)
+        player_a_id = self.db.get_player_id(self.player_a.name)
+        player_b_id = self.db.get_player_id(self.player_b.name)
+        date = datetime.now()
+        if player_a_id is not None and player_b_id is not None:
+            self.db.insert_game(player_a_id, player_b_id, "regular NIM", self.is_player_a_turn, date)
         # this is where we could save the winner to the database
         # loser could be calculated from the winner
         # we could also save the move history - TODO
