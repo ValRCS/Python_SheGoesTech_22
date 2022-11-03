@@ -95,4 +95,10 @@ class DB:
         
         self.conn.commit()
 
+    # let's return view called v_grouped_wins
+    def return_game_stats(self):
+        self.cursor.execute("""select * from v_grouped_wins""")
+        data = self.cursor.fetchall()
+        return data # list of tuples, could change to dataframe
+
     
