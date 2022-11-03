@@ -263,7 +263,7 @@ if __name__ == "__main__":
     
     game.play()
     # game is finished and saved here we can delete the object
-    del game # it will close the database connection
+    # del game # it will close the database connection
     # ask if the user wants to play again
     # we will use a while loop to keep asking for input until we get a valid input
     while True:
@@ -299,6 +299,11 @@ if __name__ == "__main__":
             break
         else:
             print("Invalid input enter y/Y or n/N")
+
+    # print game stats
+    game_stats = game.db.return_game_stats()
+    print("Game stats")
+    print(game_stats) # TODO make it pretty
 
     # we could clean up by using del game
     # but python will clean up for us since we are closing the program anyway
