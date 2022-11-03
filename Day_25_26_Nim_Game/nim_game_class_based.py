@@ -198,8 +198,21 @@ def return_players(default_computer_name="Alpha NIM"):
             break
     # we will use a tuple to return multiple values
     if player_b_name == "computer":
-        # TODO add prompt for computer level - Homework for Thursday
-        return (HumanPlayer(player_a_name), ComputerPlayer(default_computer_name))
+        # allowable levels are 1, 2, 3
+        # 1 is fixed strategy
+        # 2 is random strategy
+        # 3 is smart strategy
+
+        while True:
+            try:
+                computer_level = int(input("Enter computer level: "))
+                if computer_level >= 1 and computer_level <= 3:
+                    break
+                else:
+                    print("Computer level must be between 1 and 3")
+            except ValueError:
+                print("Computer level must be a number")
+        return (HumanPlayer(player_a_name), ComputerPlayer(default_computer_name,level = computer_level))
     else:
         return (HumanPlayer(player_a_name), HumanPlayer(player_b_name))
 
@@ -263,7 +276,23 @@ if __name__ == "__main__":
             # we could also create a new object and delete the old one
             # we will use the same object and reset it
             # game.reset() # TODO create reset option
-            # TODO option to change players
+            # ask if you want to change players
+            # if yes then call return_players again
+
+            # we will use a while loop to keep asking for input until we get a valid input
+            while True:
+                change_players = input("Do you want to change players? (y/n): ")
+                if change_players.lower().startswith("y"): # using lower lets us accept both upper and lower case
+                    print("Changing players")
+                    player_a, player_b = return_players()
+                    break # breaking out of inner while loop
+                elif change_players.lower().startswith("n"):
+                    print("Keeping same players")
+                    break # breaking out of inner while loop
+                else:
+                    print("Invalid input")
+                    continue
+
             game = NimGame(player_a=player_a, player_b=player_b, **my_config) 
             game.play()
         elif play_again.lower().startswith("n"):
@@ -273,7 +302,6 @@ if __name__ == "__main__":
 
     # we could clean up by using del game
     # but python will clean up for us since we are closing the program anyway
-    # TODO add multiple game functionality - Homework for Thursday
 
 # so for medium size application functions are a good choice
 # for large applications classes are a good choice
