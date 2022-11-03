@@ -11,7 +11,6 @@
 # with class based approach
 # functions are called methods and live inside the class
 
-# TODO have a class to manage database interactions
 
 import random
 import configparser
@@ -161,7 +160,6 @@ class NimGame:
     def print_winner(self):
         if self.is_player_a_turn:
             print(f"{self.player_a.name} wins!") # a because we already switched the turn
-            # TODO add a method to save the winner to the database
         else:
             print(f"{self.player_b.name} wins!") 
 
@@ -236,7 +234,6 @@ def get_config(path = "nim.cfg"):
 # main guard - our main entry point
 if __name__ == "__main__":
     # we create an instance (object) of the class
-    # TODO read settings from a file such as match count, player names, etc.
     my_config = get_config() # using default path
     print(my_config)
     player_a, player_b = return_players() # so we can have a human vs human or human vs computer
@@ -252,6 +249,28 @@ if __name__ == "__main__":
     game = NimGame(player_a=player_a, player_b=player_b, **my_config) # using config values
     
     game.play()
+    # game is finished and saved here we can delete the object
+    del game # it will close the database connection
+    # ask if the user wants to play again
+    # we will use a while loop to keep asking for input until we get a valid input
+    while True:
+        play_again = input("Do you want to play again? (y/n): ")
+        # philosophy we should be liberal in what we accept
+        # and conservative in what we send out to the world
+        if play_again.lower().startswith("y"): # using lower lets us accept both upper and lower case
+            # we need to create a new game object
+            # we could use the same object but we would need to reset it
+            # we could also create a new object and delete the old one
+            # we will use the same object and reset it
+            # game.reset() # TODO create reset option
+            # TODO option to change players
+            game = NimGame(player_a=player_a, player_b=player_b, **my_config) 
+            game.play()
+        elif play_again.lower().startswith("n"):
+            break
+        else:
+            print("Invalid input enter y/Y or n/N")
+
     # we could clean up by using del game
     # but python will clean up for us since we are closing the program anyway
     # TODO add multiple game functionality - Homework for Thursday
