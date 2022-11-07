@@ -6,6 +6,11 @@ import tkinter.scrolledtext
 
 import tkinter as tk
 
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+
+import string
+
 # so my App inherits from the Tk class
 class App(tk.Tk):
 
@@ -43,6 +48,15 @@ class App(tk.Tk):
         # pack the frame
         self.top_frame.pack(fill=tk.BOTH, expand=True)
 
+        # create a middle frame
+        self.middle_frame = tk.Frame()
+        # set background color - out of 24 million colors
+        self.middle_frame.config(bg="#708090") # so to set colors by numbers we use # and then the hex code
+        #set frame size
+        self.middle_frame.config(width=500, height=200)
+        # pack the frame
+        self.middle_frame.pack(fill=tk.BOTH, expand=True)
+
         # create a bottom frame
         self.bottom_frame = tk.Frame()
         # set background color
@@ -62,10 +76,26 @@ class App(tk.Tk):
         # attach the button to the top frame
         self.clear_button.pack(in_=self.top_frame, side=tk.LEFT, padx=10, pady=10)
 
+        # create a button widget to calculate word count
+        self.word_count_button = tk.Button(text="Word Frequencies", command=self.word_frequency)
+        # attach the button to the top frame
+        self.word_count_button.pack(in_=self.top_frame, side=tk.BOTTOM, padx=10, pady=10)
+
         # let's add an upper case button and the command to be called when the button is clicked
         self.upper_button = tk.Button(text="Upper Case", command=self.upper_case)
         # attach the button to the top frame
         self.upper_button.pack(in_=self.top_frame, side=tk.RIGHT, padx=10, pady=10)
+
+        # create a figure for the matplotlib graph
+
+        # create a figure
+        self.figure = plt.Figure(figsize=(5,4), dpi=100)
+        # add a subplot
+        self.subplot = self.figure.add_subplot(111)
+        # create FigureCanvasTkAgg object
+        self.canvas = FigureCanvasTkAgg(self.figure, self.middle_frame)
+        # pack it
+        self.canvas.get_tk_widget().pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
         # add a textview that can be scrolled
         # create a scrollbar
@@ -162,6 +192,44 @@ class App(tk.Tk):
         self.textview.delete("1.0", tk.END)
         self.textview.insert("1.0", text)
 
+
+    def word_frequency(self):
+        # get the text from the textview
+        text = self.textview.get("1.0", tk.END)
+        # convert the text to lower case
+        text = text.lower()
+        # remove punctuation
+        text = text.translate(str.maketrans('', '', string.punctuation))
+        # split the text into words
+        words = text.split()
+        # create a dictionary to store the word frequencies
+        word_frequencies = {}
+        # loop through the words
+        for word in words:
+            # check if the word is in the dictionary
+            if word in word_frequencies:
+                # increment the count
+                word_frequencies[word] += 1
+            else:
+                # add the word to the dictionary
+                word_frequencies[word] = 1
+        # sort the dictionary by value
+        sorted_word_frequencies = sorted(word_frequencies.items(), key=lambda x: x[1], reverse=True)
+        # get the top 10 words
+        top_10_words = sorted_word_frequencies[:10]
+        # get the words
+        words = [word for word, count in top_10_words]
+        # get the counts
+        counts = [count for word, count in top_10_words]
+        # clear the figure
+        self.figure.clear()
+        # add a subplot
+        self.subplot = self.figure.add_subplot(111)
+        # plot the graph
+        self.subplot.bar(words, counts)
+        # refresh the canvas
+        self.canvas.draw()
+
     def _setup_menus(self):
         # add a menu with a quit option
         self.menu = tk.Menu()
@@ -226,3 +294,7 @@ if __name__ == "__main__":
     # we could run some configuration code here
     main()
     # we could run some cleanup code here
+
+
+# for games there is specific pygame library for games
+# https://www.pygame.org/news
