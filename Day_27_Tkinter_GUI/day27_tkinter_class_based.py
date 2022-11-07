@@ -1,6 +1,8 @@
 # we will create an App class that inherits from the Tk class
 # this approach can be seen in tkinter documentation
 # https://docs.python.org/3/library/tkinter.html#tkinter.Tk
+import tkinter.filedialog
+import tkinter.scrolledtext
 
 import tkinter as tk
 
@@ -55,12 +57,36 @@ class App(tk.Tk):
         # attach the label to the top frame
         self.label.pack(in_=self.top_frame, side=tk.TOP, pady=10)
 
-        # add a textview
-        self.textview = tk.Text()
+        # create clear button with a command to be called when the button is clicked
+        self.clear_button = tk.Button(text="Clear Text", command=self.clear_text)
+        # attach the button to the top frame
+        self.clear_button.pack(in_=self.top_frame, side=tk.LEFT, padx=10, pady=10)
+
+        # let's add an upper case button and the command to be called when the button is clicked
+        self.upper_button = tk.Button(text="Upper Case", command=self.upper_case)
+        # attach the button to the top frame
+        self.upper_button.pack(in_=self.top_frame, side=tk.RIGHT, padx=10, pady=10)
+
+        # add a textview that can be scrolled
+        # create a scrollbar
+        # self.scrollbar = tk.Scrollbar() # we would have to add the bindings to the scrollbar
+        # attach the scrollbar to the bottom frame
+        # self.scrollbar.pack(in_=self.bottom_frame, side=tk.RIGHT, fill=tk.Y)
+        # create a textview
+        # instead lets use Scrolled Text widget
+
+
+        # self.textview = tk.Text()
+        self.textview = tkinter.scrolledtext.ScrolledText()
         # add a color to the textview
         self.textview.config(fg="yellow", bg="blue")
         # attach the textview to the bottom frame
         self.textview.pack(in_=self.bottom_frame, side=tk.TOP, pady=10)
+
+        # what other widgets can we add?
+
+        # list of tkinter widgets
+        # https://docs.python.org/3/library/tkinter.html#widgets
 
 
 
@@ -78,11 +104,63 @@ class App(tk.Tk):
             # write the text to the file
             file.write(text)
 
+    def save_file_with_dialog(self):
+        # open a file dialog
+        # we can use the asksaveasfilename method
+        # this method returns the path to the file
+        # alias tk will not work
+        # https://stackoverflow.com/questions/45533932/python-3-6-attributeerror-module-tkinter-has-no-attribute-filedialog
+        file_path = tkinter.filedialog.asksaveasfilename()
+        # get the text from the textview
+        text = self.textview.get("1.0", tk.END)
+        # open the file
+        with open(file_path, "w", encoding="utf-8") as file:
+            # write the text to the file
+            file.write(text)
+            print(f"File saved to {file_path}")
+
     # TODO add a method to open a file for now just the default file
     # file contents should be displayed in the textview
+    def open_file(self):
+        # open the file
+        with open(self.default_save_file, "r", encoding="utf-8") as file:
+            # read the text from the file
+            text = file.read()
+            # set the text in the textview
+            # self.textview.delete("1.0", tk.END)
+            # insert text at the beginning of the textview
+            # self.textview.insert("1.0", text)
+            # we insert at the end of the text
+            self.textview.insert(tk.END, text) # this will keep appending each time we open the file
 
-    # TODO later on we will explore how to open any file - you can try looking up the filedialog module
+    def clear_text(self):
+        # clear the textview
+        self.textview.delete("1.0", tk.END)
+
+    def open_file_with_dialog(self):
+        # open a file dialog
+        # we can use the askopenfilename method
+        # this method returns the path to the file
+        file_path = tkinter.filedialog.askopenfilename()
+        # open the file
+        with open(file_path, "r", encoding="utf-8") as file:
+            # read the text from the file
+            text = file.read()
+            # set the text in the textview
+            # self.textview.delete("1.0", tk.END)
+            self.clear_text() # we can use the method we created just like above text
+            # insert text at the beginning of the textview
+            self.textview.insert("1.0", text)
     # https://docs.python.org/3/library/tkinter.filedialog.html
+
+    def upper_case(self):
+        # get the text from the textview
+        text = self.textview.get("1.0", tk.END)
+        # convert the text to upper case
+        text = text.upper()
+        # set the text in the textview
+        self.textview.delete("1.0", tk.END)
+        self.textview.insert("1.0", text)
 
     def _setup_menus(self):
         # add a menu with a quit option
@@ -100,15 +178,16 @@ class App(tk.Tk):
         # add a separator
         self.file_menu.add_separator()
         # add an open option
-        self.file_menu.add_command(label="Open") # TODO add a binding to a function
+        self.file_menu.add_command(label="Open", command=self.open_file_with_dialog) 
+        self.file_menu.add_command(label="Open and Append Default", command=self.open_file) 
         # add a close option
         self.file_menu.add_command(label="Close") # TODO add a binding to a function
         # add a save option
-        self.file_menu.add_command(label="Save", command=self.save_file) # TODO add a binding to a function
+        self.file_menu.add_command(label="Save Default", command=self.save_file) 
 
 
         # add a save as option
-        self.file_menu.add_command(label="Save As") # TODO add a binding to a function
+        self.file_menu.add_command(label="Save As", command=self.save_file_with_dialog) 
         # add a separator
         self.file_menu.add_separator()
         # add an exit option
