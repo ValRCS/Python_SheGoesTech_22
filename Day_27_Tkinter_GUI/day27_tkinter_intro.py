@@ -84,3 +84,6 @@ button_minus.pack()
 # run window main loop
 window.mainloop()
 # input("Press any key to continue...") # wait for user input
+
+# if we wanted to keep a lot of widgets then we would need a dictionary to store them, 
+# if we do not want to create class based on tkinter
