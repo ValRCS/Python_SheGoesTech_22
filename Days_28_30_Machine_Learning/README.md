@@ -28,4 +28,7 @@ From: https://www.forbes.com/sites/bernardmarr/2016/12/06/what-is-the-difference
 ## Rules of Machine Learning from Google
 * https://developers.google.com/machine-learning/guides/rules-of-ml
 
+## Scikit learn library for Python
+
+* https://scikit-learn.org/stable
 
