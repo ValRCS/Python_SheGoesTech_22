@@ -29,3 +29,6 @@
 
 # black box testing is where you don't know the internals of the code - 
 # you just know what it does
+
+# good tutorial on Python testing on real python
+# https://realpython.com/python-testing
