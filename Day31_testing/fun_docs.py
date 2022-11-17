@@ -15,6 +15,7 @@ def add(a, b):
     >>> add(100, 2900)
     3000
     """
+    # you could have your regular code and comments here
     return a + b
 
 # we can use doctest to test output as well
