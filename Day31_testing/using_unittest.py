@@ -19,7 +19,7 @@ class TestAdd(unittest.TestCase):
 class TestMyList(unittest.TestCase):
     # we need a special setUp method to create our instance of MyList
     def setUp(self): # it will run before each test 
-        self.my_list = my_class.MyList()
+        self.my_list = my_class.MyList() # create an instance of MyList
         self.my_list.add(2)
         self.my_list.add(3)
         self.my_list.add(5)
@@ -45,3 +45,7 @@ if __name__ == '__main__':
 # now if your function refers to global variables it will be much harder to test
 # so you should try to avoid global variables, strive to make your functions pure - meaning some input and some output
 # and no side effects - for print we do not have a choice but for other functions we should try to avoid side effects
+
+# what is the difference between unittest and docstring testing?
+# unittest is more powerful and flexible
+# docstring testing is more simple and easy to use, and less work
